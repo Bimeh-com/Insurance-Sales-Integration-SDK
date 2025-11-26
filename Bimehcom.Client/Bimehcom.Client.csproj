@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="SubClients\Abstraction\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bimehcom.Core\Bimehcom.Core.csproj" />
+  </ItemGroup>
+
+</Project>
