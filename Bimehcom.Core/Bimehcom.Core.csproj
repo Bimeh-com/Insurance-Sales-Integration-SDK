@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="Models\SubClients\Fire\Responses\" />
     <Folder Include="Models\SubClients\Fire\Requests\" />
+    <Folder Include="Models\SubClients\Auth\" />
   </ItemGroup>
 
 </Project>
