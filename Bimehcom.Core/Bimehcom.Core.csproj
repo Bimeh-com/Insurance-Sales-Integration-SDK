@@ -6,10 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\SubClients\" />
-    <Folder Include="Models\Abstraction\" />
-    <Folder Include="Models\SubClients\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Models\SubClients\Fire\Responses\" />
+    <Folder Include="Models\SubClients\Fire\Requests\" />
   </ItemGroup>
 
 </Project>
