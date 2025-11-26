@@ -1,4 +1,5 @@
-﻿using Bimehcom.Core.Interfaces;
+﻿using Bimehcom.Core.Exceptions;
+using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Options;
 using System;
 using System.Collections.Generic;
@@ -43,10 +44,12 @@ namespace Bimehcom.Client.Services
             try
             {
                 ApplyGlobalHeaders(customHeaders);
-                var response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
 
+                var response = await _httpClient.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
+
+                ValidateResponse(response, json);
+
                 return JsonSerializer.Deserialize<TResponse>(json);
             }
             catch (Exception ex)
@@ -64,9 +67,10 @@ namespace Bimehcom.Client.Services
 
                 var jsonContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync(url, jsonContent);
-                response.EnsureSuccessStatusCode();
-
                 var json = await response.Content.ReadAsStringAsync();
+
+                ValidateResponse(response, json);
+
                 return JsonSerializer.Deserialize<TResponse>(json);
             }
             catch (Exception ex)
@@ -84,9 +88,10 @@ namespace Bimehcom.Client.Services
 
                 var jsonContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PutAsync(url, jsonContent);
-                response.EnsureSuccessStatusCode();
-
                 var json = await response.Content.ReadAsStringAsync();
+
+                ValidateResponse(response, json);
+
                 return JsonSerializer.Deserialize<TResponse>(json);
             }
             catch (Exception ex)
@@ -103,6 +108,10 @@ namespace Bimehcom.Client.Services
                 ApplyGlobalHeaders(customHeaders);
 
                 var response = await _httpClient.DeleteAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+                
+                ValidateResponse(response, json);
+
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -114,7 +123,34 @@ namespace Bimehcom.Client.Services
 
         private void HandleException(Exception ex)
         {
-            // TODO: Implement custom exception handling
+            if (ex is HttpRequestException)
+            {
+                throw new BimehcomHttpException("Something went wrong while making the HTTP request.", ex);
+            }
+            else if (ex is TaskCanceledException)
+            {
+                throw new BimehcomHttpException("The HTTP request timed out.", ex);
+            }
+            else if (ex is BimehcomApiException)
+            {
+                throw ex;
+            }
+            else
+            {
+                throw new BimehcomException("An unexpected error occurred inside the SDK.", ex);
+            }
+        }
+
+        private void ValidateResponse(HttpResponseMessage response, string json)
+        {
+            if ((int)response.StatusCode >= 400 && (int)response.StatusCode < 500)
+            {
+                throw new BimehcomApiException((int)response.StatusCode, json);
+            }
+            else if (!response.IsSuccessStatusCode)
+            {
+                throw new BimehcomHttpException("Server error occurred.", new Exception(json));
+            }
         }
     }
 }

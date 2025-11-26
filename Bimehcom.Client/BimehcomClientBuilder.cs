@@ -15,7 +15,7 @@ namespace Bimehcom.Client
         {
             _options = new BimehcomClientOptions();
             options(_options);
-            _options.Validate();
+            _options.EnsureValid();
 
             _httpService = new HttpService(_options);
         }

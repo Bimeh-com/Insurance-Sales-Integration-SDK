@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
     <Folder Include="Models\SubClients\Fire\Responses\" />
     <Folder Include="Models\SubClients\Fire\Requests\" />
   </ItemGroup>
