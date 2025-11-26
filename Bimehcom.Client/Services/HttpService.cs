@@ -15,10 +15,10 @@ namespace Bimehcom.Client.Services
         private readonly HttpClient _httpClient;
         private readonly BimehcomClientOptions _options;
 
-        public HttpService(BimehcomClientOptions options)
+        public HttpService(BimehcomClientOptions options, HttpClient? httpClient = null)
         {
             _options = options;
-            _httpClient = HttpClientStore.GetOrCreate(_options.BaseApiUrl);
+            _httpClient = httpClient ?? HttpClientStore.GetOrCreate(_options.BaseApiUrl);
         }
 
         private void ApplyGlobalHeaders(Dictionary<string, string>? customHeaders = null)
@@ -109,7 +109,7 @@ namespace Bimehcom.Client.Services
 
                 var response = await _httpClient.DeleteAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
-                
+
                 ValidateResponse(response, json);
 
                 return response.IsSuccessStatusCode;
@@ -124,21 +124,13 @@ namespace Bimehcom.Client.Services
         private void HandleException(Exception ex)
         {
             if (ex is HttpRequestException)
-            {
                 throw new BimehcomHttpException("Something went wrong while making the HTTP request.", ex);
-            }
             else if (ex is TaskCanceledException)
-            {
                 throw new BimehcomHttpException("The HTTP request timed out.", ex);
-            }
-            else if (ex is BimehcomApiException)
-            {
+            else if (ex is BimehcomApiException || ex is BimehcomHttpException)
                 throw ex;
-            }
             else
-            {
                 throw new BimehcomException("An unexpected error occurred inside the SDK.", ex);
-            }
         }
 
         private void ValidateResponse(HttpResponseMessage response, string json)
