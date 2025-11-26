@@ -1,12 +1,15 @@
 ﻿using Bimehcom.Core;
+using Bimehcom.Core.Interfaces;
 
 namespace Bimehcom.Client
 {
     internal class BimehcomClient : IBimehcomClient
     {
-        public BimehcomClient()
+        private readonly IHttpService _httpService;
+
+        public BimehcomClient(IHttpService httpService)
         {
-            
+            _httpService = httpService;
         }
     }
 }
