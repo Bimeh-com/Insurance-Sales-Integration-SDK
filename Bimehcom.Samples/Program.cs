@@ -10,6 +10,7 @@ IBimehcomClient client = new BimehcomClientBuilder((opt) =>
     opt.ApiVersion = "v1";
 }).Build();
 
+#region Fire Insurance
 //Basic Data
 
 FireInsuranceBasicDataResponse basicDataResponse = await client.Fire.GetBasicDataAsync();
@@ -52,7 +53,7 @@ var setInfoRequest = new FireInsuranceSetInfoRequest
     LastName = "افشارپور",
     FloorCount = 1,
     MobileNumber = "09309959493",
-    NationalCode = "0021191808",
+    NationalCode = "1111111111",
     OwnershipTypeId = 1,
     TypeId = 0
 };
@@ -98,5 +99,7 @@ var redirectToGatewayRequest = new FireInsuranceRedirectToGatewayRequest
 };
 
 FireInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await client.Fire.RedirectToGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
+
+#endregion
 
 Console.WriteLine();
