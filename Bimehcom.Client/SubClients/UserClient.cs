@@ -15,12 +15,12 @@ namespace Bimehcom.Client.SubClients
             _httpService = httpService;
         }
 
-        public async Task<GetUserAddressesResponse> GetAddresses()
+        public async Task<GetUserAddressesResponse> GetAddressesAsync()
         {
             return await _httpService.GetAsync<GetUserAddressesResponse>(ApiRoutes.GetUserAddresses());
         }
 
-        public async Task<GetUserPolicyOwnersResponse> GetPolicyOwners()
+        public async Task<GetUserPolicyOwnersResponse> GetPolicyOwnersAsync()
         {
             return await _httpService.GetAsync<GetUserPolicyOwnersResponse>(ApiRoutes.GetUserPolicyOwners());
         }

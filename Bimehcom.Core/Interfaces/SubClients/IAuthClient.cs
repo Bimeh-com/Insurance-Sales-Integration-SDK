@@ -7,6 +7,6 @@ namespace Bimehcom.Core.Interfaces.SubClients
 {
     public interface IAuthClient
     {
-        Task<AuthLocalLoginResponse> LocalLogin(AuthLocalLoginRequest request);
+        Task<AuthLocalLoginResponse> LocalLoginAsync(AuthLocalLoginRequest request);
     }
 }

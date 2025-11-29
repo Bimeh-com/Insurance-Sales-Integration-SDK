@@ -18,14 +18,14 @@ var localLoginRequest = new AuthLocalLoginRequest
     Username = "09309959493",
     Password = "ash@1234"
 };
-var loginResponse = await client.Auth.LocalLogin(localLoginRequest);
+var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 
 #endregion
 
 #region User
-GetUserAddressesResponse addresses = await client.User.GetAddresses();
+GetUserAddressesResponse addresses = await client.User.GetAddressesAsync();
 
-GetUserPolicyOwnersResponse policyOwners = await client.User.GetPolicyOwners();
+GetUserPolicyOwnersResponse policyOwners = await client.User.GetPolicyOwnersAsync();
 #endregion
 
 #region Fire Insurance

@@ -16,7 +16,7 @@ namespace Bimehcom.Client.SubClients
             _httpService = httpService;
         }
 
-        public async Task<AuthLocalLoginResponse> LocalLogin(AuthLocalLoginRequest request)
+        public async Task<AuthLocalLoginResponse> LocalLoginAsync(AuthLocalLoginRequest request)
         {
             var loginResponse = await _httpService.PostAsync<AuthLocalLoginRequest, AuthLocalLoginResponse>(ApiRoutes.LocalLogin(), request);
 
