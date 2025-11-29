@@ -5,7 +5,7 @@ namespace Bimehcom.Core.Interfaces.SubClients
 {
     public interface IUserClient
     {
-        Task<GetUserAddressesResponse> GetAddresses();
-        Task<GetUserPolicyOwnersResponse> GetPolicyOwners();
+        Task<GetUserAddressesResponse> GetAddressesAsync();
+        Task<GetUserPolicyOwnersResponse> GetPolicyOwnersAsync();
     }
 }
