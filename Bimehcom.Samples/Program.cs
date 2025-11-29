@@ -3,6 +3,7 @@ using Bimehcom.Core;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
+using Bimehcom.Core.Models.SubClients.User.Responses;
 
 IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 {
@@ -14,11 +15,17 @@ IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 #region Authentication
 var localLoginRequest = new AuthLocalLoginRequest
 {
-    Username = "username",
-    Password = "password"
+    Username = "09309959493",
+    Password = "ash@1234"
 };
 var loginResponse = await client.Auth.LocalLogin(localLoginRequest);
 
+#endregion
+
+#region User
+GetUserAddressesResponse addresses = await client.User.GetAddresses();
+
+GetUserPolicyOwnersResponse policyOwners = await client.User.GetPolicyOwners();
 #endregion
 
 #region Fire Insurance

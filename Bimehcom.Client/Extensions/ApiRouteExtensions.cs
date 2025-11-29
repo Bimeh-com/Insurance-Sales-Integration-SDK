@@ -3,6 +3,9 @@
     internal static class ApiRoutes
     {
         internal static string LocalLogin() => $"authentication/local-login";
+
+        internal static string GetUserAddresses() => $"user/address";
+        internal static string GetUserPolicyOwners() => $"user/policy-owner";
         
         internal static string BasicData(string subClientName) => $"insurance/{subClientName}/basic-data";
         internal static string Inquiry(string subClientName) => $"insurance/{subClientName}/inquiry";
