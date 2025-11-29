@@ -47,12 +47,12 @@ FireInsuranceInfoResponse getInfoResponse = await client.Fire.GetInfoAsync(insur
 var setInfoRequest = new FireInsuranceSetInfoRequest
 {
     AddressId = 1725179,
-    BirthDate = "1998/3/20",
+    BirthDate = "1969/12/31",
     ConstructingDate = 1404,
     FirstName = "اشکان",
     LastName = "افشارپور",
     FloorCount = 1,
-    MobileNumber = "09309959493",
+    MobileNumber = "09123456789",
     NationalCode = "1111111111",
     OwnershipTypeId = 1,
     TypeId = 0
