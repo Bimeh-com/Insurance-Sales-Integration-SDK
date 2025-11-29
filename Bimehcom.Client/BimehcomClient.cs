@@ -28,6 +28,19 @@ namespace Bimehcom.Client
             }
         }
 
+        private IUserClient? _user;
+        public IUserClient User
+        {
+            get
+            {
+                if (_user == null)
+                    lock (_lock)
+                        _user = new UserClient(_httpService);
+                return _user;
+            }
+        }
+
+
         private IFireInsuranceClient? _fire;
         public IFireInsuranceClient Fire
         {

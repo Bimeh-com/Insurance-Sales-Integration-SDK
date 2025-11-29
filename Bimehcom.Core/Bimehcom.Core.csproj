@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Folder Include="Models\SubClients\Base\" />
+    <Folder Include="Models\SubClients\User\Requests\" />
   </ItemGroup>
 
 </Project>
