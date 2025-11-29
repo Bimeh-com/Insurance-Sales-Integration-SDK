@@ -4,14 +4,9 @@ using Bimehcom.Core.Options;
 using FluentAssertions;
 using Moq;
 using Moq.Protected;
-using System;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace Bimehcom.Tests.Unit.Client.Services
 {
@@ -191,6 +186,8 @@ namespace Bimehcom.Tests.Unit.Client.Services
             };
 
             var service = CreateService(response);
+
+            service.AddGlobalHeader("Token", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
 
             var customHeaders = new System.Collections.Generic.Dictionary<string, string>
             {

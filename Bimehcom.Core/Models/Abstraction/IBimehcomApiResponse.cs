@@ -1,6 +1,6 @@
 ﻿namespace Bimehcom.Core.Models.Abstraction
 {
-    internal interface IBimehcomRequest
+    public interface IBimehcomApiResponse
     {
     }
 }
