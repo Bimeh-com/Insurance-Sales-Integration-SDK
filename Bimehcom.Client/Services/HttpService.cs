@@ -159,7 +159,9 @@ namespace Bimehcom.Client.Services
         {
             if ((int)response.StatusCode >= 400 && (int)response.StatusCode < 500)
             {
-                throw new BimehcomApiException((int)response.StatusCode, json);
+                var errorObj = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+
+                throw new BimehcomApiException((int)response.StatusCode, errorObj["Message"]);
             }
             else if (!response.IsSuccessStatusCode)
             {
