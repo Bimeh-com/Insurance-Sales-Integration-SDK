@@ -82,7 +82,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
         {
             var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
-                Content = new StringContent("{\"error\":\"bad request\"}", Encoding.UTF8, "application/json")
+                Content = new StringContent("{\"Message\":\"bad request\"}", Encoding.UTF8, "application/json")
             };
 
             var service = CreateService(response);
@@ -166,7 +166,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
         {
             var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
-                Content = new StringContent("{\"error\":\"bad request\"}")
+                Content = new StringContent("{\"Message\":\"bad request\"}")
             };
 
             var service = CreateService(response);
