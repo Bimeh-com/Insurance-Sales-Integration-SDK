@@ -192,6 +192,8 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             var service = CreateService(response);
 
+            service.AddGlobalHeader("Token", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
+
             var customHeaders = new System.Collections.Generic.Dictionary<string, string>
             {
                 { "Custom", "HeaderValue" }

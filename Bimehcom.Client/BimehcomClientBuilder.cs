@@ -18,6 +18,8 @@ namespace Bimehcom.Client
             _options.EnsureValid();
 
             _httpService = new HttpService(_options);
+            _httpService.AddGlobalHeader("Token", _options.ApiKey);
+            _httpService.AddGlobalHeader("Authorization", $"Bearer ey...");
         }
 
         public IBimehcomClient Build()

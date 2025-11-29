@@ -1,5 +1,6 @@
 ﻿using Bimehcom.Core.Exceptions;
 using Bimehcom.Core.Interfaces;
+using Bimehcom.Core.Models.SubClients.Fire.Responses;
 using Bimehcom.Core.Options;
 using System;
 using System.Collections.Generic;
@@ -13,21 +14,27 @@ namespace Bimehcom.Client.Services
     internal class HttpService : IHttpService
     {
         private readonly HttpClient _httpClient;
-        private readonly BimehcomClientOptions _options;
+
+        private Dictionary<string, string> _globalHeaders = new Dictionary<string, string>();
+
 
         public HttpService(BimehcomClientOptions options, HttpClient? httpClient = null)
         {
-            _options = options;
-            _httpClient = httpClient ?? HttpClientStore.GetOrCreate(_options.BaseApiUrl);
+            var apiBaseUrl = new Uri(options.BaseApiUrl.AbsoluteUri + options.ApiVersion + "/");
+            _httpClient = httpClient ?? HttpClientStore.GetOrCreate(apiBaseUrl);
         }
 
+        public void AddGlobalHeader(string name, string value)
+        {
+            _globalHeaders.Add(name, value);
+        }
         private void ApplyGlobalHeaders(Dictionary<string, string>? customHeaders = null)
         {
             _httpClient.DefaultRequestHeaders.Clear();
 
-            if (!string.IsNullOrEmpty(_options.ApiKey))
+            foreach (var header in _globalHeaders)
             {
-                _httpClient.DefaultRequestHeaders.Add("Token", _options.ApiKey);
+                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
 
             if (customHeaders != null)
@@ -39,6 +46,10 @@ namespace Bimehcom.Client.Services
             }
         }
 
+        public async Task<TResponse> GetAsync<TResponse>(string url)
+        {
+            return await GetAsync<TResponse>(url, null);
+        }
         public async Task<TResponse> GetAsync<TResponse>(string url, Dictionary<string, string>? customHeaders = null)
         {
             try
@@ -59,6 +70,10 @@ namespace Bimehcom.Client.Services
             }
         }
 
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body)
+        {
+            return await PostAsync<TRequest, TResponse>(url, body, null);
+        }
         public async Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null)
         {
             try
@@ -80,6 +95,10 @@ namespace Bimehcom.Client.Services
             }
         }
 
+        public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body)
+        {
+            return await PutAsync<TRequest, TResponse>(url, body, null);
+        }
         public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null)
         {
             try
@@ -101,6 +120,10 @@ namespace Bimehcom.Client.Services
             }
         }
 
+        public async Task<bool> DeleteAsync(string url)
+        {
+            return await DeleteAsync(url, null);
+        }
         public async Task<bool> DeleteAsync(string url, Dictionary<string, string>? customHeaders = null)
         {
             try
