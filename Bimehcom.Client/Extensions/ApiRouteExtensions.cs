@@ -2,10 +2,10 @@
 {
     internal static class ApiRoutes
     {
+        internal static string LocalLogin() => $"authentication/local-login";
+        
         internal static string BasicData(string subClientName) => $"insurance/{subClientName}/basic-data";
-
         internal static string Inquiry(string subClientName) => $"insurance/{subClientName}/inquiry";
-
         internal static string Create(string subClientName) => $"insurance/{subClientName}/create";
         internal static string GetInfo(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/info";
         internal static string SetInfo(string subClientName, dynamic insuranceRequestId) => $"insurance/{subClientName}/{insuranceRequestId}/info";

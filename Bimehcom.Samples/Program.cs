@@ -1,5 +1,6 @@
 ﻿using Bimehcom.Client;
 using Bimehcom.Core;
+using Bimehcom.Core.Models.SubClients.Auth.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
 
@@ -9,6 +10,16 @@ IBimehcomClient client = new BimehcomClientBuilder((opt) =>
     opt.BaseApiUrl = new Uri("https://coreapi.bimeh.com");
     opt.ApiVersion = "v1";
 }).Build();
+
+#region Authentication
+var localLoginRequest = new AuthLocalLoginRequest
+{
+    Username = "username",
+    Password = "password"
+};
+var loginResponse = await client.Auth.LocalLogin(localLoginRequest);
+
+#endregion
 
 #region Fire Insurance
 //Basic Data
@@ -47,13 +58,13 @@ FireInsuranceInfoResponse getInfoResponse = await client.Fire.GetInfoAsync(insur
 var setInfoRequest = new FireInsuranceSetInfoRequest
 {
     AddressId = 1725179,
-    BirthDate = "1969/12/31",
+    BirthDate = "1998/3/20",
     ConstructingDate = 1404,
     FirstName = "John",
     LastName = "Doe",
     FloorCount = 1,
-    MobileNumber = "09123456789",
-    NationalCode = "1111111111",
+    MobileNumber = "09309959493",
+    NationalCode = "0021191808",
     OwnershipTypeId = 1,
     TypeId = 0
 };
@@ -82,7 +93,7 @@ var setLogisticsRequirementsRequest = new FireInsuranceSetLogisticsRequirementsR
     Description = "",
     Email = "",
     ReceiverFullName = "John Doe",
-    ReceiverMobileNumber = "09123456789"
+    ReceiverMobileNumber = "09309959493"
 };
 FireInsuranceSetLogisticsRequirementsResponse setLogisticsRequirementsResponse = await client.Fire.SetLogisticsRequirementsAsync(insuranceRequestId, setLogisticsRequirementsRequest);
 

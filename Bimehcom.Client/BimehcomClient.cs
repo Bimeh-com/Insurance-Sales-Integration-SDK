@@ -16,6 +16,18 @@ namespace Bimehcom.Client
 
         #region Sub Clients
 
+        private IAuthClient? _auth;
+        public IAuthClient Auth
+        {
+            get
+            {
+                if (_auth == null)
+                    lock (_lock)
+                        _auth = new AuthClient(_httpService);
+                return _auth;
+            }
+        }
+
         private IFireInsuranceClient? _fire;
         public IFireInsuranceClient Fire
         {
