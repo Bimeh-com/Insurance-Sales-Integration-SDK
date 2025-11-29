@@ -16,7 +16,7 @@ IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 var localLoginRequest = new AuthLocalLoginRequest
 {
     Username = "09309959493",
-    Password = "ash@1234"
+    Password = "haha123"
 };
 var loginResponse = await client.Auth.LocalLogin(localLoginRequest);
 
