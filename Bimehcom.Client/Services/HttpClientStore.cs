@@ -23,5 +23,7 @@ namespace Bimehcom.Client.Services
             }
             return _globalClient;
         }
+        internal static void Reset() => _globalClient = null;
     }
+
 }
