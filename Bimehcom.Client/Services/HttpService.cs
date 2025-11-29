@@ -1,6 +1,5 @@
 ﻿using Bimehcom.Core.Exceptions;
 using Bimehcom.Core.Interfaces;
-using Bimehcom.Core.Models.SubClients.Fire.Responses;
 using Bimehcom.Core.Options;
 using System;
 using System.Collections.Generic;

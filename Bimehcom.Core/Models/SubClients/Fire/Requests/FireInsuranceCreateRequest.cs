@@ -1,7 +1,4 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bimehcom.Core.Models.SubClients.Fire.Requests
 {

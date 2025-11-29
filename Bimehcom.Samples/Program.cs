@@ -2,7 +2,6 @@
 using Bimehcom.Core;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
-using System.Runtime.InteropServices;
 
 IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 {

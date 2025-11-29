@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bimehcom.Core.Models.Base.LogisticRequirements.Set
+﻿namespace Bimehcom.Core.Models.Base.LogisticRequirements.Set
 {
     public class LogisticsRequirementInformationRequest
     {

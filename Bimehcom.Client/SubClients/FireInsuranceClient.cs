@@ -3,7 +3,6 @@ using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Client.SubClients

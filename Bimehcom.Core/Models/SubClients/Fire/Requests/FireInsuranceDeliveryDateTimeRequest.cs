@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bimehcom.Core.Models.SubClients.Fire.Requests
+﻿namespace Bimehcom.Core.Models.SubClients.Fire.Requests
 {
     public class FireInsuranceDeliveryDateTimeRequest
     {

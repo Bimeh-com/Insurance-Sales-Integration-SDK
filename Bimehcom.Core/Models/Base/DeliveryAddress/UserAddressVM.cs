@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bimehcom.Core.Models.Base.DeliveryAddress
+﻿namespace Bimehcom.Core.Models.Base.DeliveryAddress
 {
     public class UserAddressVM
     {

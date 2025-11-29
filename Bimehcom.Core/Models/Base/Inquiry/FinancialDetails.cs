@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-
-namespace Bimehcom.Core.Models.Base.Inquiry
+﻿namespace Bimehcom.Core.Models.Base.Inquiry
 {
     public class FinancialDetails
     {

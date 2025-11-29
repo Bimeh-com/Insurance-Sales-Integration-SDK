@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bimehcom.Core.Models.Base
+﻿namespace Bimehcom.Core.Models.Base
 {
     public class BaseItem
     {
