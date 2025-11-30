@@ -1,6 +1,6 @@
 ﻿using Bimehcom.Client.Extensions;
 using Bimehcom.Core.Interfaces;
-using Bimehcom.Core.Interfaces.SubClients;
+using Bimehcom.Core.Interfaces.SubClients.Base;
 using Bimehcom.Core.Models.Abstraction;
 using System.Threading.Tasks;
 
@@ -92,7 +92,7 @@ where TResponse : IBimehcomApiResponse
             return await _httpService.GetAsync<TResponse>(ApiRoutes.GetPaymentOptions((object)insuranceRequestId));
         }
 
-        public async Task<TResponse> RedirectToGatewayAsync<TRequest, TResponse>(dynamic insuranceRequestId, TRequest request)
+        public async Task<TResponse> RedirectToPaymentGatewayAsync<TRequest, TResponse>(dynamic insuranceRequestId, TRequest request)
             where TRequest : IBimehcomApiRequest
         {
             return await _httpService.PostAsync<TRequest, TResponse>(ApiRoutes.RedirectToGateway((object)insuranceRequestId), request);

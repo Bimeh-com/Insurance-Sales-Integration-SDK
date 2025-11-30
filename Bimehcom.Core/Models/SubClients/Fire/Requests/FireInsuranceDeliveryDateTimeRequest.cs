@@ -1,7 +1,9 @@
-﻿namespace Bimehcom.Core.Models.SubClients.Fire.Requests
+﻿using Bimehcom.Core.Models.Abstraction;
+using Bimehcom.Core.Models.Base.DeliveryDateTime;
+
+namespace Bimehcom.Core.Models.SubClients.Fire.Requests
 {
-    public class FireInsuranceDeliveryDateTimeRequest
+    public class FireInsuranceDeliveryDateTimeRequest : DeliveryDateTimeRequest, IBimehcomApiRequest
     {
-        public long AddressId { get; set; }
     }
 }

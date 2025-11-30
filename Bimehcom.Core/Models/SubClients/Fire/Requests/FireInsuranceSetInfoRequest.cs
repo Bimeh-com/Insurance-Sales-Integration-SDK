@@ -1,5 +1,6 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
 using Bimehcom.Core.Models.Base.Info.Set;
+using System;
 
 namespace Bimehcom.Core.Models.SubClients.Fire.Requests
 {
@@ -29,6 +30,6 @@ namespace Bimehcom.Core.Models.SubClients.Fire.Requests
         /// <summary>
         /// تاریخ تولد
         /// </summary>
-        public override string? BirthDate { get => base.BirthDate; set => base.BirthDate = value; }
+        public override DateTime? BirthDate { get => base.BirthDate; set => base.BirthDate = value; }
     }
 }

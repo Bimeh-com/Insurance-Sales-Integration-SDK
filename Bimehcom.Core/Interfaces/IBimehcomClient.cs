@@ -6,6 +6,7 @@ namespace Bimehcom.Core
     {
         IAuthClient Auth { get; }
         IUserClient User { get; }
+        IThirdPartyInsuranceClient ThirdParty { get; }
         IFireInsuranceClient Fire { get; }
     }
 }

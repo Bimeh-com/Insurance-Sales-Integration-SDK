@@ -18,6 +18,6 @@ namespace Bimehcom.Core.Interfaces.SubClients
         Task<FireInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestid, FireInsuranceSetLogisticsRequirementsRequest request);
         Task<bool> ValidationAsync(dynamic insuranceRequestid);
         Task<FireInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestid);
-        Task<FireInsuranceRedirectToGatewayResponse> RedirectToGatewayAsync(dynamic insuranceRequestid, FireInsuranceRedirectToGatewayRequest request);
+        Task<FireInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestid, FireInsuranceRedirectToGatewayRequest request);
     }
 }
