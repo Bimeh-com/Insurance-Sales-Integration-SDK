@@ -1,4 +1,5 @@
 ﻿using Bimehcom.Core.Models.Base.Info.Get;
+using System;
 
 namespace Bimehcom.Core.Models.Base.Info.Set
 {
@@ -24,7 +25,7 @@ namespace Bimehcom.Core.Models.Base.Info.Set
         /// </summary>
         public string NationalCode { get; set; }
 
-        public virtual string? BirthDate { get; set; }
+        public virtual DateTime? BirthDate { get; set; }
 
         public virtual string FatherName { get; set; }
 

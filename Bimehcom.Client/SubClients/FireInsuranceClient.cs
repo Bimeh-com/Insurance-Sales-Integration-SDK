@@ -30,7 +30,7 @@ namespace Bimehcom.Client.SubClients
         public async Task<FireInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestid, FireInsuranceDeliveryDateTimeRequest request) => await base.DeliveryDateTimeAsync<FireInsuranceDeliveryDateTimeRequest, FireInsuranceDeliveryDateTimeResponse>((object)insuranceRequestid, request);
         public async Task<bool> ValidationAsync(dynamic insuranceRequestid) => await base.ValidationAsync<bool>((object)insuranceRequestid);
         public async Task<FireInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestid) => await base.GetPaymentGatewayOptionsAsync<FireInsuranceGetGatewayOptionsResponse>((object)insuranceRequestid);
-        public async Task<FireInsuranceRedirectToGatewayResponse> RedirectToGatewayAsync(dynamic insuranceRequestid,FireInsuranceRedirectToGatewayRequest request) => await base.RedirectToGatewayAsync<FireInsuranceRedirectToGatewayRequest,FireInsuranceRedirectToGatewayResponse>((object)insuranceRequestid, request);
+        public async Task<FireInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestid,FireInsuranceRedirectToGatewayRequest request) => await base.RedirectToPaymentGatewayAsync<FireInsuranceRedirectToGatewayRequest,FireInsuranceRedirectToGatewayResponse>((object)insuranceRequestid, request);
 
     }
 }

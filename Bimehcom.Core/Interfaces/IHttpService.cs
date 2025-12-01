@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Core.Interfaces
@@ -7,6 +8,7 @@ namespace Bimehcom.Core.Interfaces
     {
         Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body);
         Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null);
+        Task<TResponse> PostFileAsync<TResponse>(string url, Stream fileStream, string fileName, string formFieldName, Dictionary<string, string>? customHeaders = null);
         Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body);
         Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null);
         Task<bool> DeleteAsync(string url);

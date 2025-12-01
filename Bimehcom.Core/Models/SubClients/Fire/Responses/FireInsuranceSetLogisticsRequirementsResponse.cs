@@ -1,11 +1,10 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
+using Bimehcom.Core.Models.Base;
 
 namespace Bimehcom.Core.Models.SubClients.Fire.Responses
 {
-    public class FireInsuranceSetLogisticsRequirementsResponse : IBimehcomApiResponse
+    public class FireInsuranceSetLogisticsRequirementsResponse : StartInsuranceResponse,IBimehcomApiResponse
     {
-        public dynamic InsuranceRequestId { get; set; }
-
-        public dynamic AdditionalInfo { get; set; }
+      
     }
 }

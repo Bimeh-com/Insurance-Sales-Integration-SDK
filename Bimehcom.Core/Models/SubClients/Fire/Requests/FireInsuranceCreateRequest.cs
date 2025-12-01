@@ -1,9 +1,9 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
+using Bimehcom.Core.Models.Base;
 
 namespace Bimehcom.Core.Models.SubClients.Fire.Requests
 {
-    public class FireInsuranceCreateRequest : IBimehcomApiRequest
+    public class FireInsuranceCreateRequest : CreateRequest,IBimehcomApiRequest
     {
-        public string UniqueId { get; set; }
     }
 }

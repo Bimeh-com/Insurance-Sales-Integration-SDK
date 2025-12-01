@@ -40,6 +40,17 @@ namespace Bimehcom.Client
             }
         }
 
+        private IThirdPartyInsuranceClient? _thirdParty;
+        public IThirdPartyInsuranceClient ThirdParty
+        {
+            get
+            {
+                if (_thirdParty == null)
+                    lock (_lock)
+                        _thirdParty = new ThirdPartyInsuranceClient(_httpService);
+                return _thirdParty;
+            }
+        }
 
         private IFireInsuranceClient? _fire;
         public IFireInsuranceClient Fire
@@ -52,6 +63,7 @@ namespace Bimehcom.Client
                 return _fire;
             }
         }
+
 
         #endregion
     }
