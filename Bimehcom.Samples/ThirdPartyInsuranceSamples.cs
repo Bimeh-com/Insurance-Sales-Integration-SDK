@@ -90,7 +90,7 @@ namespace Bimehcom.Samples
                 MobileNumber = "09309959493",
                 NationalCode = "0021191808",
                 PolicyOwnerIsCarOwner = true,
-                CarOwnerMobileNumber = "09309959493",
+                Phone = "09309959493",
                 TypeId = 0,
 
             };
