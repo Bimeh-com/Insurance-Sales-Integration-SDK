@@ -1,10 +1,11 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
 using Bimehcom.Core.Models.Base;
+using Bimehcom.Core.Models.Base.Inquiry;
 using System.Collections.Generic;
 
 namespace Bimehcom.Core.Models.SubClients.ThirdParty.Responses
 {
-    public class ThirdPartyInsuranceBasicDataResponse : IBimehcomApiResponse
+    public class ThirdPartyInsuranceBasicDataResponse : BasicData, IBimehcomApiResponse
     {    /// <summary>
          /// لیست پوشش ها
          /// </summary>

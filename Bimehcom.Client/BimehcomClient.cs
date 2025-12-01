@@ -52,6 +52,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private ICarBodyInsuranceClient? _carBody;
+        public ICarBodyInsuranceClient CarBody
+        {
+            get
+            {
+                if (_carBody == null)
+                    lock (_lock)
+                        _carBody = new CarBodyInsuranceClient(_httpService);
+                return _carBody;
+            }
+        }
+
         private IFireInsuranceClient? _fire;
         public IFireInsuranceClient Fire
         {

@@ -25,6 +25,7 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new FireInsuranceSamples(client).RunAsync();
 
 // Third Party Insurance
-await new ThirdPartyInsuranceSamples(client).RunAsync();
+//await new ThirdPartyInsuranceSamples(client).RunAsync();
 
-
+// Car Body Insurance
+await new CarBodyInsuranceSamples(client).RunAsync();
