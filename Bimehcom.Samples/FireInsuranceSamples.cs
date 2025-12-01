@@ -48,9 +48,10 @@ namespace Bimehcom.Samples
 
 
             // Set Info
+            var userAddresses = await Client.User.GetAddressesAsync();
             var setInfoRequest = new FireInsuranceSetInfoRequest
             {
-                AddressId = 1725179,
+                AddressId = userAddresses.Addresses.FirstOrDefault().Id,
                 BirthDate = DateTime.Parse("1998/3/20"),
                 ConstructingDate = 1404,
                 FirstName = "John",

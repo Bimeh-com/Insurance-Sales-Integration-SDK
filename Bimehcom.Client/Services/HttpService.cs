@@ -1,9 +1,12 @@
-﻿using Bimehcom.Core.Exceptions;
+﻿using Bimehcom.Client.Services.Models;
+using Bimehcom.Core.Exceptions;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -93,6 +96,31 @@ namespace Bimehcom.Client.Services
                 return default;
             }
         }
+        public async Task<TResponse> PostFileAsync<TResponse>(string url, Stream fileStream, string fileName, string formFieldName, Dictionary<string, string>? customHeaders = null)
+        {
+            try
+            {
+                ApplyGlobalHeaders(customHeaders);
+
+                using var form = new MultipartFormDataContent();
+                using var fileContent = new StreamContent(fileStream);
+
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                form.Add(fileContent, formFieldName, fileName);
+
+                var response = await _httpClient.PostAsync(url, form);
+                var json = await response.Content.ReadAsStringAsync();
+
+                ValidateResponse(response, json);
+
+                return JsonSerializer.Deserialize<TResponse>(json)!;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                return default!;
+            }
+        }
 
         public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body)
         {
@@ -159,9 +187,9 @@ namespace Bimehcom.Client.Services
         {
             if ((int)response.StatusCode >= 400 && (int)response.StatusCode < 500)
             {
-                var errorObj = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+                var apiExceptionResponse = JsonSerializer.Deserialize<ApiExceptionResponse>(json);
 
-                throw new BimehcomApiException((int)response.StatusCode, errorObj["Message"]);
+                throw new BimehcomApiException((int)response.StatusCode, apiExceptionResponse.Message);
             }
             else if (!response.IsSuccessStatusCode)
             {

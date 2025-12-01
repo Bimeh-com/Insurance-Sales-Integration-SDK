@@ -11,4 +11,10 @@
     <ProjectReference Include="..\Bimehcom.Client\Bimehcom.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Files\bimehdotcom_logo.jfif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

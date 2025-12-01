@@ -36,11 +36,24 @@ namespace Bimehcom.Samples
 
             ThirdPartyInsuranceInquiryResponse inquiryResponse = await Client.ThirdParty.InquiryAsync(inquiryRequest);
 
+            // Installments
+
+            var getInstallmentsRequest = new ThirdPartyInsuranceGetInstallmentsRequest
+            {
+                UniqueId = inquiryResponse.Inquiries.FirstOrDefault(x => x.HasInstallments == true)?.UniqueId
+            };
+
+            ThirdPartyInsuranceGetInstallmentsResponse installmentsResponse = await Client.ThirdParty.GetInstallmentsAsync(getInstallmentsRequest);
 
             // Create
             var createRequest = new ThirdPartyInsuranceCreateRequest
             {
                 UniqueId = inquiryResponse.Inquiries.FirstOrDefault()?.UniqueId
+            };
+
+            var createRequestWithInstallment = new ThirdPartyInsuranceCreateRequest
+            {
+                UniqueId = installmentsResponse.Installments.FirstOrDefault()?.UniqueId
             };
 
             ThirdPartyInsuranceCreateResponse createResponse = await Client.ThirdParty.CreateAsync(createRequest);
@@ -52,24 +65,36 @@ namespace Bimehcom.Samples
 
 
             // Set Info
+            var userAddresses = await Client.User.GetAddressesAsync();
             var setInfoRequest = new ThirdPartyInsuranceSetInfoRequest
             {
-                AddressId = 1725179,
+                AddressId = userAddresses.Addresses.FirstOrDefault().Id,
                 BirthDate = DateTime.Parse("1998/3/20"),
                 FirstName = "John",
                 LastName = "Doe",
                 MobileNumber = "09309959493",
                 NationalCode = "0021191808",
                 PolicyOwnerIsCarOwner = true,
+                CarOwnerMobileNumber = "09309959493",
                 TypeId = 0,
-                
+
             };
 
             ThirdPartyInsuranceSetInfoResponse setInfoResponse = await Client.ThirdParty.SetInfoAsync(insuranceRequestId, setInfoRequest);
 
             // Required File
-
             ThirdPartyInsuranceRequiredFileResponse requiredFileResponse = await Client.ThirdParty.RequiredFileAsync(insuranceRequestId);
+
+            var filePath = Path.Combine(AppContext.BaseDirectory, "Files", "bimehdotcom_logo.jfif");
+
+            foreach (var requiredFile in requiredFileResponse.RequiredFiles)
+            {
+
+                using var stream = File.OpenRead(filePath);
+
+
+                ThirdPartyInsuranceUploadRequiredFileResponse uploadFileResponse = await Client.ThirdParty.UploadRequiredFileAsync(insuranceRequestId, stream, "test", requiredFile.FileName);
+            }
 
             // Logistics Requirements
             ThirdPartyInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.ThirdParty.LogisticsRequirementsAsync(insuranceRequestId);
