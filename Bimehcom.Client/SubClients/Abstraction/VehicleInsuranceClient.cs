@@ -1,6 +1,8 @@
 ﻿using Bimehcom.Client.Extensions;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients.Base;
+using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
+using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
 using Bimehcom.Core.Models.SubClients.Vehicle.Responses;
 using System.Threading.Tasks;
 
@@ -21,6 +23,11 @@ namespace Bimehcom.Client.SubClients.Abstraction
         public async Task<VehicleClientCarModelsResponse> GetCarModelsByCategoryAndBrand(int brandId, int categoryId)
         {
             return await _httpService.GetAsync<VehicleClientCarModelsResponse>(ApiRoutes.CarModels(_insuranceType, brandId, categoryId));
+        }
+
+        public async Task<VehicleClientPlaqueInquiryResponse> PlaqueInquiry(VehicleClientPlaqueInquiryRequest request)
+        {
+            return await _httpService.PostAsync<VehicleClientPlaqueInquiryRequest,VehicleClientPlaqueInquiryResponse>(ApiRoutes.PlaqueIInquiry(),request);
         }
     }
 }

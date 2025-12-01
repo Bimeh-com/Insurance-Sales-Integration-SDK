@@ -1,4 +1,6 @@
 ﻿using Bimehcom.Core;
+using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
+using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
 using Bimehcom.Core.Models.SubClients.ThirdParty.Requests;
 using Bimehcom.Core.Models.SubClients.ThirdParty.Responses;
 using Bimehcom.Core.Models.SubClients.Vehicle.Responses;
@@ -16,8 +18,21 @@ namespace Bimehcom.Samples
 
         public async Task RunAsync()
         {
+        
             // Basic Data
             ThirdPartyInsuranceBasicDataResponse basicData = await Client.ThirdParty.GetBasicDataAsync();
+
+            // Plque Inquiry
+            var plaqueInquiryRequest = new VehicleClientPlaqueInquiryRequest
+            {
+                RightSide = 123,
+                LetterId = 4,
+                LeftSide = 56,
+                IranCode = 78,
+                NationalCode = "1234567890",
+            };
+            VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.ThirdParty.PlaqueInquiry(plaqueInquiryRequest);
+
 
             // Car Models
             VehicleClientCarModelsResponse carModels = await Client.ThirdParty.GetCarModelsByCategoryAndBrand(1001, 1);
