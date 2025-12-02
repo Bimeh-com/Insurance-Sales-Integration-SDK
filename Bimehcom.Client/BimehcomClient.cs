@@ -64,6 +64,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private IMotorcycleThirdPartyInsuranceClient? _motorcycleThirdParty;
+        public IMotorcycleThirdPartyInsuranceClient MotorcycleThirdParty
+        {
+            get
+            {
+                if (_motorcycleThirdParty == null)
+                    lock (_lock)
+                        _motorcycleThirdParty = new MotorcycleThirdPartyInsuranceClient(_httpService);
+                return _motorcycleThirdParty;
+            }
+        }
+
         private IFireInsuranceClient? _fire;
         public IFireInsuranceClient Fire
         {

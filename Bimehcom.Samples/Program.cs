@@ -12,7 +12,7 @@ IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 var localLoginRequest = new AuthLocalLoginRequest
 {
     Username = "09309959493",
-    Password = "haha@123"
+    Password = "@shkan776655"
 };
 var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 #endregion
@@ -28,4 +28,7 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new ThirdPartyInsuranceSamples(client).RunAsync();
 
 // Car Body Insurance
-await new CarBodyInsuranceSamples(client).RunAsync();
+//await new CarBodyInsuranceSamples(client).RunAsync();
+
+// Motorcycle Third Party Insurance
+await new MotorcycleThirdPartyInsuranceSamples(client).RunAsync();

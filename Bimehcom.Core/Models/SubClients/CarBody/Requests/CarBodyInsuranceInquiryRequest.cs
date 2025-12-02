@@ -19,7 +19,7 @@ namespace Bimehcom.Core.Models.SubClients.CarBody.Requests
         /// <summary>
         /// پوشش های اضافی
         /// </summary>
-        public List<string> CoverageIds { get; set; }
+        public List<string> CoverageIds { get; set; } = new List<string>();
         /// <summary>
         /// شرکت بیمه ثالث
         /// </summary>
