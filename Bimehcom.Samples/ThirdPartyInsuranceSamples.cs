@@ -84,8 +84,8 @@ namespace Bimehcom.Samples
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
                 BirthDate = DateTime.Parse("1998/3/20"),
-                FirstName = "John",
-                LastName = "Doe",
+                FirstName = "تست",
+                LastName = "تست پور",
                 MobileNumber = "09309959493",
                 NationalCode = "0021191808",
                 PolicyOwnerIsCarOwner = true,
@@ -127,9 +127,9 @@ namespace Bimehcom.Samples
             var setLogisticsRequirementsRequest = new ThirdPartyInsuranceSetLogisticsRequirementsRequest
             {
                 UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault()?.Times.FirstOrDefault()?.UniqueId,
-                Description = "",
+                Description = "جهت تست نرم افزار",
                 Email = "",
-                ReceiverFullName = "John Doe",
+                ReceiverFullName = "تست تست پور",
                 ReceiverMobileNumber = "09309959493"
             };
 
