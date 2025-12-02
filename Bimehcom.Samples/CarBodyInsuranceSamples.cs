@@ -42,7 +42,6 @@ namespace Bimehcom.Samples
             {
                 CarBodyNoDamageYearId = null,
                 Imported = false,
-                InquiryUrl = "https://bimeh.com/carbody/planlist?VehicleCategoryId=1&ModelId=1001&Imported=0&ProductionDate=2021/03/21&Price=12000000000&UsingTypeId=1&ThirdPartyDiscountId=0&ThirdPartyCompanyId=1026&BrandId=1001&yearBuild=2021&hasInsurance=false&fromFilter=false&isRenewal=false",
                 ModelId = 1001,
                 Price = 12000000000,
                 ProductionDate = DateTime.Parse("2021/03/21"),

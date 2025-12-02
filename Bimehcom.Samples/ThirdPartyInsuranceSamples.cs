@@ -41,7 +41,6 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new ThirdPartyInsuranceInquiryRequest
             {
-                InquiryUrl = "https://bimeh.com/thirdparty/planlist?UsingTypeId=1&BrandId=1001&ModelId=1001&VehicleCategoryId=1&ProductionYearId=2025&PreviousInsuranceStatusId=0&ReleaseDate=2025/11/30&isRenewal=false",
                 ModelId = 1001,
                 PreviousInsuranceStatusId = 0,
                 ProductionYearId = 2025,
