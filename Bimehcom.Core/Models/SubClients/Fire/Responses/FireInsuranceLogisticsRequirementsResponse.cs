@@ -3,7 +3,7 @@ using Bimehcom.Core.Models.Base.LogisticRequirements.Get;
 
 namespace Bimehcom.Core.Models.SubClients.Fire.Responses
 {
-    public class FireInsuranceLogisticsRequirementsResponse: LogisticsRequirementInfo, IBimehcomApiResponse
+    public class FireInsuranceLogisticsRequirementsResponse : LogisticsRequirementInfo, IBimehcomApiResponse
     {
     }
 }

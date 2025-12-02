@@ -10,5 +10,6 @@ namespace Bimehcom.Core.Interfaces
         ICarBodyInsuranceClient CarBody { get; }
         IMotorcycleThirdPartyInsuranceClient MotorcycleThirdParty { get; }
         IFireInsuranceClient Fire { get; }
+        IHealthInsuranceClient Health { get; }
     }
 }

@@ -124,7 +124,7 @@ namespace Bimehcom.Samples
 
             var setLogisticsRequirementsRequest = new CarThirdPartyInsuranceSetLogisticsRequirementsRequest
             {
-                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault()?.Times.FirstOrDefault()?.UniqueId,
+                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
                 Description = "جهت تست نرم افزار",
                 Email = "",
                 ReceiverFullName = "تست تست پور",
