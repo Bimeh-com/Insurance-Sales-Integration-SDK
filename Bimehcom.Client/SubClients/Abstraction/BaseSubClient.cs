@@ -111,6 +111,5 @@ where TResponse : IBimehcomApiResponse
         {
             return await _httpService.PostAsync<TRequest, TResponse>(ApiRoutes.RedirectToGateway((object)insuranceRequestId), request);
         }
-
     }
 }

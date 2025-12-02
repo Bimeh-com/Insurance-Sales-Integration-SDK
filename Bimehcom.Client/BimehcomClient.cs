@@ -87,6 +87,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private IHealthInsuranceClient? _health;
+        public IHealthInsuranceClient Health
+        {
+            get
+            {
+                if (_health == null)
+                    lock (_lock)
+                        _health = new HealthInsuranceClient(_httpService);
+                return _health;
+            }
+        }
+
 
         #endregion
     }

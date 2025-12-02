@@ -1,4 +1,6 @@
-﻿namespace Bimehcom.Client.Extensions
+﻿using System;
+
+namespace Bimehcom.Client.Extensions
 {
     internal static class ApiRoutes
     {
@@ -27,5 +29,11 @@
         internal static string Validation(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/validation";
         internal static string GetPaymentOptions(dynamic insuranceRequestId) => $"payment/gateway/{insuranceRequestId}";
         internal static string RedirectToGateway(dynamic insuranceRequestId) => $"payment/redirect-to-payment/{insuranceRequestId}";
+
+        // Health Insurance Extra Workflows
+        internal static string ExtraInsured(dynamic insuranceRequestId) => $"insurance/health/{insuranceRequestId}/extra-insured";
+        internal static string ExtraInsuredRequiredFileUpload(dynamic insuranceRequestId,Guid extraInsuredId) => $"insurance/{insuranceRequestId}/extra-insured/{extraInsuredId}/required-file";
+
+
     }
 }
