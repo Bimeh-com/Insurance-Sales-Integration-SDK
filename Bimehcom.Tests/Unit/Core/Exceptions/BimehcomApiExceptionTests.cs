@@ -1,7 +1,7 @@
 ﻿using Bimehcom.Core.Exceptions;
 using FluentAssertions;
 
-namespace Bimehcom.Tests.Unit.Core
+namespace Bimehcom.Tests.Unit.Core.Exceptions
 {
     public class BimehcomApiExceptionTests
     {

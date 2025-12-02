@@ -1,5 +1,5 @@
 ﻿using Bimehcom.Client;
-using Bimehcom.Core;
+using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
 using Bimehcom.Samples;
 

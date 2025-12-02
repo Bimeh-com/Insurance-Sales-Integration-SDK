@@ -1,5 +1,4 @@
 ﻿using Bimehcom.Client.SubClients;
-using Bimehcom.Core;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 
@@ -40,15 +39,15 @@ namespace Bimehcom.Client
             }
         }
 
-        private IThirdPartyInsuranceClient? _thirdParty;
-        public IThirdPartyInsuranceClient ThirdParty
+        private ICarThirdPartyInsuranceClient? _carThirdParty;
+        public ICarThirdPartyInsuranceClient CarThirdParty
         {
             get
             {
-                if (_thirdParty == null)
+                if (_carThirdParty == null)
                     lock (_lock)
-                        _thirdParty = new ThirdPartyInsuranceClient(_httpService);
-                return _thirdParty;
+                        _carThirdParty = new CarThirdPartyInsuranceClient(_httpService);
+                return _carThirdParty;
             }
         }
 

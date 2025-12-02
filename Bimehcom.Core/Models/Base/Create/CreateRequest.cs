@@ -1,4 +1,4 @@
-﻿namespace Bimehcom.Core.Models.Base
+﻿namespace Bimehcom.Core.Models.Base.Create
 {
     public class CreateRequest
     {

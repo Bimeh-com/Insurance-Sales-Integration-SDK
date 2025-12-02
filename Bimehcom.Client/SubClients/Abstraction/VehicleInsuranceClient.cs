@@ -3,7 +3,6 @@ using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients.Base;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
-using Bimehcom.Core.Models.SubClients.Vehicle.Responses;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Client.SubClients.Abstraction

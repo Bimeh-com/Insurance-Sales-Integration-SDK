@@ -1,10 +1,8 @@
-﻿using Bimehcom.Core;
+﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
-using Bimehcom.Core.Models.SubClients.ThirdParty.Requests;
-using Bimehcom.Core.Models.SubClients.ThirdParty.Responses;
-using Bimehcom.Core.Models.SubClients.Vehicle.Responses;
-
+using Bimehcom.Core.Models.SubClients.CarThirdParty.Requests;
+using Bimehcom.Core.Models.SubClients.CarThirdParty.Responses;
 namespace Bimehcom.Samples
 {
     internal class ThirdPartyInsuranceSamples
@@ -20,7 +18,7 @@ namespace Bimehcom.Samples
         {
         
             // Basic Data
-            ThirdPartyInsuranceBasicDataResponse basicData = await Client.ThirdParty.GetBasicDataAsync();
+            CarThirdPartyInsuranceBasicDataResponse basicData = await Client.CarThirdParty.GetBasicDataAsync();
 
             // Plque Inquiry
             var plaqueInquiryRequest = new VehicleClientPlaqueInquiryRequest
@@ -31,15 +29,15 @@ namespace Bimehcom.Samples
                 IranCode = 78,
                 NationalCode = "1234567890",
             };
-            VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.ThirdParty.PlaqueInquiry(plaqueInquiryRequest);
+            VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.CarThirdParty.PlaqueInquiry(plaqueInquiryRequest);
 
 
             // Car Models
-            VehicleClientCarModelsResponse carModels = await Client.ThirdParty.GetCarModelsByCategoryAndBrand(1001, 1);
+            VehicleClientCarModelsResponse carModels = await Client.CarThirdParty.GetCarModelsByCategoryAndBrand(1001, 1);
 
             // Inquiry
 
-            var inquiryRequest = new ThirdPartyInsuranceInquiryRequest
+            var inquiryRequest = new CarThirdPartyInsuranceInquiryRequest
             {
                 ModelId = 1001,
                 PreviousInsuranceStatusId = 0,
@@ -48,39 +46,39 @@ namespace Bimehcom.Samples
                 UsingTypeId = 1,
             };
 
-            ThirdPartyInsuranceInquiryResponse inquiryResponse = await Client.ThirdParty.InquiryAsync(inquiryRequest);
+            CarThirdPartyInsuranceInquiryResponse inquiryResponse = await Client.CarThirdParty.InquiryAsync(inquiryRequest);
 
             // Installments
 
-            var getInstallmentsRequest = new ThirdPartyInsuranceGetInstallmentsRequest
+            var getInstallmentsRequest = new CarThirdPartyInsuranceGetInstallmentsRequest
             {
                 UniqueId = inquiryResponse.Inquiries.FirstOrDefault(x => x.HasInstallments == true)?.UniqueId
             };
 
-            ThirdPartyInsuranceGetInstallmentsResponse installmentsResponse = await Client.ThirdParty.GetInstallmentsAsync(getInstallmentsRequest);
+            CarThirdPartyInsuranceGetInstallmentsResponse installmentsResponse = await Client.CarThirdParty.GetInstallmentsAsync(getInstallmentsRequest);
 
             // Create
-            var createRequest = new ThirdPartyInsuranceCreateRequest
+            var createRequest = new CarThirdPartyInsuranceCreateRequest
             {
                 UniqueId = inquiryResponse.Inquiries.FirstOrDefault()?.UniqueId
             };
 
-            var createRequestWithInstallment = new ThirdPartyInsuranceCreateRequest
+            var createRequestWithInstallment = new CarThirdPartyInsuranceCreateRequest
             {
                 UniqueId = installmentsResponse.Installments.FirstOrDefault()?.UniqueId
             };
 
-            ThirdPartyInsuranceCreateResponse createResponse = await Client.ThirdParty.CreateAsync(createRequest);
+            CarThirdPartyInsuranceCreateResponse createResponse = await Client.CarThirdParty.CreateAsync(createRequest);
 
             var insuranceRequestId = createResponse.InsuranceRequestId;
 
             // Get Info
-            ThirdPartyInsuranceInfoResponse getInfoResponse = await Client.ThirdParty.GetInfoAsync(insuranceRequestId);
+            CarThirdPartyInsuranceInfoResponse getInfoResponse = await Client.CarThirdParty.GetInfoAsync(insuranceRequestId);
 
 
             // Set Info
             var userAddresses = await Client.User.GetAddressesAsync();
-            var setInfoRequest = new ThirdPartyInsuranceSetInfoRequest
+            var setInfoRequest = new CarThirdPartyInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
                 BirthDate = DateTime.Parse("1998/3/20"),
@@ -94,10 +92,10 @@ namespace Bimehcom.Samples
 
             };
 
-            ThirdPartyInsuranceSetInfoResponse setInfoResponse = await Client.ThirdParty.SetInfoAsync(insuranceRequestId, setInfoRequest);
+            CarThirdPartyInsuranceSetInfoResponse setInfoResponse = await Client.CarThirdParty.SetInfoAsync(insuranceRequestId, setInfoRequest);
 
             // Required File
-            ThirdPartyInsuranceRequiredFileResponse requiredFileResponse = await Client.ThirdParty.RequiredFileAsync(insuranceRequestId);
+            CarThirdPartyInsuranceRequiredFileResponse requiredFileResponse = await Client.CarThirdParty.RequiredFileAsync(insuranceRequestId);
 
             var filePath = Path.Combine(AppContext.BaseDirectory, "Files", "bimehdotcom_logo.jfif");
 
@@ -107,24 +105,24 @@ namespace Bimehcom.Samples
                 using var stream = File.OpenRead(filePath);
 
 
-                ThirdPartyInsuranceUploadRequiredFileResponse uploadFileResponse = await Client.ThirdParty.UploadRequiredFileAsync(insuranceRequestId, stream, "test", requiredFile.FileName);
+                CarThirdPartyInsuranceUploadRequiredFileResponse uploadFileResponse = await Client.CarThirdParty.UploadRequiredFileAsync(insuranceRequestId, stream, "test", requiredFile.FileName);
             }
 
             // Logistics Requirements
-            ThirdPartyInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.ThirdParty.LogisticsRequirementsAsync(insuranceRequestId);
+            CarThirdPartyInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.CarThirdParty.LogisticsRequirementsAsync(insuranceRequestId);
 
             // Delivery Addresses
-            ThirdPartyInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.ThirdParty.DeliveryAddressesAsync(insuranceRequestId);
+            CarThirdPartyInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.CarThirdParty.DeliveryAddressesAsync(insuranceRequestId);
 
-            var deliveryDateTimeRequest = new ThirdPartyInsuranceDeliveryDateTimeRequest
+            var deliveryDateTimeRequest = new CarThirdPartyInsuranceDeliveryDateTimeRequest
             {
                 AddressId = deliveryAddresses.SelectedId
             };
 
             // Delivery Date/Time 
-            ThirdPartyInsuranceDeliveryDateTimeResponse deliveryDateTimeResponse = await Client.ThirdParty.DeliveryDateTimeAsync(insuranceRequestId, deliveryDateTimeRequest);
+            CarThirdPartyInsuranceDeliveryDateTimeResponse deliveryDateTimeResponse = await Client.CarThirdParty.DeliveryDateTimeAsync(insuranceRequestId, deliveryDateTimeRequest);
 
-            var setLogisticsRequirementsRequest = new ThirdPartyInsuranceSetLogisticsRequirementsRequest
+            var setLogisticsRequirementsRequest = new CarThirdPartyInsuranceSetLogisticsRequirementsRequest
             {
                 UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault()?.Times.FirstOrDefault()?.UniqueId,
                 Description = "جهت تست نرم افزار",
@@ -134,25 +132,25 @@ namespace Bimehcom.Samples
             };
 
             // Set Logistics Requirements
-            ThirdPartyInsuranceSetLogisticsRequirementsResponse setLogisticsRequirementsResponse = await Client.ThirdParty.SetLogisticsRequirementsAsync(insuranceRequestId, setLogisticsRequirementsRequest);
+            CarThirdPartyInsuranceSetLogisticsRequirementsResponse setLogisticsRequirementsResponse = await Client.CarThirdParty.SetLogisticsRequirementsAsync(insuranceRequestId, setLogisticsRequirementsRequest);
 
 
             // Validate
-            var validationResult = await Client.ThirdParty.ValidationAsync(insuranceRequestId);
+            var validationResult = await Client.CarThirdParty.ValidationAsync(insuranceRequestId);
 
             // Get Gateway Options
-            ThirdPartyInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.ThirdParty.GetPaymentGatewayOptionsAsync(insuranceRequestId);
+            CarThirdPartyInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.CarThirdParty.GetPaymentGatewayOptionsAsync(insuranceRequestId);
 
 
             // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new ThirdPartyInsuranceRedirectToGatewayRequest
+            var redirectToGatewayRequest = new CarThirdPartyInsuranceRedirectToGatewayRequest
             {
                 GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
                 FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
                 SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
             };
 
-            ThirdPartyInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.ThirdParty.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
+            CarThirdPartyInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.CarThirdParty.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
 
         }
     }

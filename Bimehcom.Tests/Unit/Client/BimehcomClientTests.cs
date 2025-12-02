@@ -4,7 +4,6 @@ using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Client.SubClients;
 using FluentAssertions;
 using Moq;
-using Bimehcom.Core;
 
 namespace Bimehcom.Tests.Unit.Client
 {

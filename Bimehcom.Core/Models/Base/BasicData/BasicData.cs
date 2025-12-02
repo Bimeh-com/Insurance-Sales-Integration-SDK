@@ -1,7 +1,6 @@
-﻿using Bimehcom.Core.Models.Base.BasicData;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Bimehcom.Core.Models.Base.Inquiry
+namespace Bimehcom.Core.Models.Base.BasicData
 {
     public class BasicData
     {

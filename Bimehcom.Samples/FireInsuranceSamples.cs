@@ -1,4 +1,4 @@
-﻿using Bimehcom.Core;
+﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
 

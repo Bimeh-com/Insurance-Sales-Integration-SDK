@@ -2,9 +2,9 @@
 using Bimehcom.Core.Models.Base.Info.Set;
 using System;
 
-namespace Bimehcom.Core.Models.SubClients.ThirdParty.Requests
+namespace Bimehcom.Core.Models.SubClients.CarThirdParty.Requests
 {
-    public class ThirdPartyInsuranceSetInfoRequest : InsuranceRequestBasicInformation, IBimehcomApiRequest
+    public class CarThirdPartyInsuranceSetInfoRequest : InsuranceRequestBasicInformation, IBimehcomApiRequest
     {
         public bool? PolicyOwnerIsCarOwner { get; set; }
 

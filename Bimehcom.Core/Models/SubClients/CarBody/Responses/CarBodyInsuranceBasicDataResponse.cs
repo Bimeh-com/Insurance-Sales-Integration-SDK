@@ -1,6 +1,5 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
-using Bimehcom.Core.Models.Base;
-using Bimehcom.Core.Models.Base.Inquiry;
+using Bimehcom.Core.Models.Base.BasicData;
 using System.Collections.Generic;
 
 namespace Bimehcom.Core.Models.SubClients.CarBody.Responses

@@ -1,4 +1,6 @@
-﻿namespace Bimehcom.Core.Models.Base.Info.Get
+﻿using Bimehcom.Core.Models.Base.BasicData;
+
+namespace Bimehcom.Core.Models.Base.Info.Get
 {
     public class Address
     {
