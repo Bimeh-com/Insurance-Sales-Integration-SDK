@@ -8,6 +8,7 @@ namespace Bimehcom.Core
         IUserClient User { get; }
         IThirdPartyInsuranceClient ThirdParty { get; }
         ICarBodyInsuranceClient CarBody { get; }
+        IMotorcycleThirdPartyInsuranceClient MotorcycleThirdParty { get; }
         IFireInsuranceClient Fire { get; }
     }
 }
