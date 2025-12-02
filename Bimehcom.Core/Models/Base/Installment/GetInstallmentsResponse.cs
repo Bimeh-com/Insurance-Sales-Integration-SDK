@@ -1,7 +1,6 @@
-﻿using Bimehcom.Core.Models.Base.Installment;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Bimehcom.Core.Models.Base
+namespace Bimehcom.Core.Models.Base.Installment
 {
     public class GetInstallmentsResponse
     {

@@ -2,9 +2,9 @@
 using Bimehcom.Core.Models.Base.Inquiry;
 using System;
 
-namespace Bimehcom.Core.Models.SubClients.ThirdParty.Requests
+namespace Bimehcom.Core.Models.SubClients.CarThirdParty.Requests
 {
-    public class ThirdPartyInsuranceInquiryRequest : InquiryRequest, IBimehcomApiRequest
+    public class CarThirdPartyInsuranceInquiryRequest : InquiryRequest, IBimehcomApiRequest
     {
         /// <summary>
         /// شناسه وضعیت بیمه نامه قبلی

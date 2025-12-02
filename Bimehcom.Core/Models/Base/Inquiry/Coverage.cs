@@ -1,4 +1,6 @@
 ﻿
+using Bimehcom.Core.Models.Base.BasicData;
+
 namespace Bimehcom.Core.Models.Base.Inquiry
 {
     public class Coverage : BaseItem

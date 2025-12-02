@@ -1,12 +1,12 @@
 ﻿using Bimehcom.Core.Interfaces.SubClients;
 
-namespace Bimehcom.Core
+namespace Bimehcom.Core.Interfaces
 {
     public interface IBimehcomClient
     {
         IAuthClient Auth { get; }
         IUserClient User { get; }
-        IThirdPartyInsuranceClient ThirdParty { get; }
+        ICarThirdPartyInsuranceClient CarThirdParty { get; }
         ICarBodyInsuranceClient CarBody { get; }
         IMotorcycleThirdPartyInsuranceClient MotorcycleThirdParty { get; }
         IFireInsuranceClient Fire { get; }

@@ -1,9 +1,8 @@
-﻿using Bimehcom.Core;
+﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
 using Bimehcom.Core.Models.SubClients.CarBody.Requests;
 using Bimehcom.Core.Models.SubClients.CarBody.Responses;
-using Bimehcom.Core.Models.SubClients.Vehicle.Responses;
 namespace Bimehcom.Samples
 {
     internal class CarBodyInsuranceSamples

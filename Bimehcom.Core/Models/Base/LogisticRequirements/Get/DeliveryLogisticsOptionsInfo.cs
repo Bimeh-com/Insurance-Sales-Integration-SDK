@@ -1,4 +1,6 @@
-﻿namespace Bimehcom.Core.Models.Base.LogisticRequirements.Get
+﻿using Bimehcom.Core.Models.Base.BasicData;
+
+namespace Bimehcom.Core.Models.Base.LogisticRequirements.Get
 {
     public class DeliveryLogisticsOptionsInfo
     {

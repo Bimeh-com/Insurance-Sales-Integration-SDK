@@ -1,5 +1,4 @@
-﻿
-namespace Bimehcom.Core.Models.Base
+﻿namespace Bimehcom.Core.Models.Base.BasicData
 {
     public class VehicleCategoriesBaseItem : BaseItem
     {

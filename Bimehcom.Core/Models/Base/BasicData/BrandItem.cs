@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Bimehcom.Core.Models.Base
+namespace Bimehcom.Core.Models.Base.BasicData
 {
     public class BrandItem : BaseItem
     {
