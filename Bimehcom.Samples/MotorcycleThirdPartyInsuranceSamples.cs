@@ -49,8 +49,8 @@ namespace Bimehcom.Samples
             {
                 AddressId = 1725179,
                 BirthDate = DateTime.Parse("1996/3/20"),
-                FirstName = "اشکان",
-                LastName = "افشارپور",
+                FirstName = "تست",
+                LastName = "تست پور",
                 MobileNumber = "09309959493",
                 NationalCode = "0021191808",
                 PolicyOwnerIsCarOwner = true,
@@ -76,7 +76,7 @@ namespace Bimehcom.Samples
 
             var setLogisticsRequirementsRequest = new MotorcycleThirdPartyInsuranceSetLogisticsRequirementsRequest
             {
-                Description = ""
+                Description = "جهت تست نرم افزار"
             };
 
             // Set Logistics Requirements
