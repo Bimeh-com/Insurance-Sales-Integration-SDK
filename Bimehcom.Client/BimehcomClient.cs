@@ -111,6 +111,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private IElevatorInsuranceClient? _elevator;
+        public IElevatorInsuranceClient Elevator
+        {
+            get
+            {
+                if (_elevator == null)
+                    lock (_lock)
+                        _elevator = new ElevatorInsuranceClient(_httpService);
+                return _elevator;
+            }
+        }
+
         #endregion
     }
 }

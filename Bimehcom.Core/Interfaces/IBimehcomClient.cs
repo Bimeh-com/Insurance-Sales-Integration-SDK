@@ -12,5 +12,6 @@ namespace Bimehcom.Core.Interfaces
         IFireInsuranceClient Fire { get; }
         IHealthInsuranceClient Health { get; }
         IMedicalLiabilityInsuranceClient MedicalLiability { get; }
+        IElevatorInsuranceClient Elevator { get; }
     }
 }

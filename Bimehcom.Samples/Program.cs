@@ -1,6 +1,7 @@
 ﻿using Bimehcom.Client;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
+using Bimehcom.Samples;
 
 IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 {
@@ -11,7 +12,7 @@ IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 var localLoginRequest = new AuthLocalLoginRequest
 {
     Username = "09309959493",
-    Password = "haha@1234"
+    Password = "Ashk@n0099"
 };
 var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 #endregion
@@ -36,4 +37,7 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new HealthInsuranceSamples(client).RunAsync();
 
 // Medical Liability Insurance
-await new MedicalLiabilityInsuranceSamples(client).RunAsync();
+//await new MedicalLiabilityInsuranceSamples(client).RunAsync();
+
+// Elevator Insurance
+await new ElevatorInsuranceSamples(client).RunAsync();
