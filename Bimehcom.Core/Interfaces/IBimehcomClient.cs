@@ -11,5 +11,6 @@ namespace Bimehcom.Core.Interfaces
         IMotorcycleThirdPartyInsuranceClient MotorcycleThirdParty { get; }
         IFireInsuranceClient Fire { get; }
         IHealthInsuranceClient Health { get; }
+        IMedicalLiabilityInsuranceClient MedicalLiability { get; }
     }
 }

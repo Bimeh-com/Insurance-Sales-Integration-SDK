@@ -3,7 +3,7 @@ using Bimehcom.Core.Models.Base.RequiredFiles;
 
 namespace Bimehcom.Core.Models.SubClients.CarThirdParty.Responses
 {
-    public class CarThirdPartyInsuranceUploadRequiredFileResponse: UploadRequiredFileResponse, IBimehcomApiResponse
+    public class CarThirdPartyInsuranceUploadRequiredFileResponse : UploadRequiredFileResponse, IBimehcomApiResponse
     {
     }
 }

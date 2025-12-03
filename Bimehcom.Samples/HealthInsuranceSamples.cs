@@ -1,8 +1,6 @@
 ﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.Base.ExtraInsured;
-using Bimehcom.Core.Models.SubClients.CarBody.Responses;
-using Bimehcom.Core.Models.SubClients.CarThirdParty.Responses;
 using Bimehcom.Core.Models.SubClients.Health.Requests;
 using Bimehcom.Core.Models.SubClients.Health.Responses;
 namespace Bimehcom.Samples
