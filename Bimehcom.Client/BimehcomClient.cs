@@ -99,6 +99,17 @@ namespace Bimehcom.Client
             }
         }
 
+        private IMedicalLiabilityInsuranceClient? _medicalLiability;
+        public IMedicalLiabilityInsuranceClient MedicalLiability
+        {
+            get
+            {
+                if (_medicalLiability == null)
+                    lock (_lock)
+                        _medicalLiability = new MedicalLiabilityInsuranceClient(_httpService);
+                return _medicalLiability;
+            }
+        }
 
         #endregion
     }
