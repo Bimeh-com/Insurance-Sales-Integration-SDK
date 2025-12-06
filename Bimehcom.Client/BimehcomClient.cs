@@ -147,6 +147,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private IPilgrimageInsuranceClient? _Pilgrimage;
+        public IPilgrimageInsuranceClient Pilgrimage
+        {
+            get
+            {
+                if (_Pilgrimage == null)
+                    lock (_lock)
+                        _Pilgrimage = new PilgrimageInsuranceClient(_httpService);
+                return _Pilgrimage;
+            }
+        }
+
         #endregion
     }
 }
