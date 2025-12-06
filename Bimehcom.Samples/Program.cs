@@ -49,4 +49,7 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new SportsInsuranceSamples(client).RunAsync();
 
 // Pilgrimage Insurance
-await new PilgrimageInsuranceSamples(client).RunAsync();
+//await new PilgrimageInsuranceSamples(client).RunAsync();
+
+// Travel Plus Insurance
+await new TravelPlusInsuranceSamples(client).RunAsync();

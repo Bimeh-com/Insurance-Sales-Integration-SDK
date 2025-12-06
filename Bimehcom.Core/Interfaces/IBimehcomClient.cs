@@ -16,5 +16,6 @@ namespace Bimehcom.Core.Interfaces
         IPersonalAccidentInsuranceClient PersonalAccident { get; }
         ISportsInsuranceClient Sports { get; }
         IPilgrimageInsuranceClient Pilgrimage { get; }
+        ITravelPlusInsuranceClient TravelPlus { get; }
     }
 }

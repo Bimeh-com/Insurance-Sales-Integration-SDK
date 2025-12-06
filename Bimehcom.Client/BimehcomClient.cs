@@ -159,6 +159,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private ITravelPlusInsuranceClient? _travelPlus;
+        public ITravelPlusInsuranceClient TravelPlus
+        {
+            get
+            {
+                if (_travelPlus == null)
+                    lock (_lock)
+                        _travelPlus = new TravelPlusInsuranceClient(_httpService);
+                return _travelPlus;
+            }
+        }
+
         #endregion
     }
 }

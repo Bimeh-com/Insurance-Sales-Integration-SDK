@@ -22,7 +22,7 @@ namespace Bimehcom.Samples
             var inquiryRequest = new SportsInsuranceInquiryRequest
             {
                 BirthDate = DateTime.Parse("1998/3/20"),
-                CareerId = 1
+                CareerId = 8
             };
 
 
