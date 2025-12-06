@@ -123,6 +123,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private IPersonalAccidentInsuranceClient? _personalAccident;
+        public IPersonalAccidentInsuranceClient PersonalAccident
+        {
+            get
+            {
+                if (_personalAccident == null)
+                    lock (_lock)
+                        _personalAccident = new PersonalAccidentInsuranceClient(_httpService);
+                return _personalAccident;
+            }
+        }
+
         #endregion
     }
 }
