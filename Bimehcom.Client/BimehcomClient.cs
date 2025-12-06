@@ -135,6 +135,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private ISportsInsuranceClient? _sports;
+        public ISportsInsuranceClient Sports
+        {
+            get
+            {
+                if (_sports == null)
+                    lock (_lock)
+                        _sports = new SportsInsuranceClient(_httpService);
+                return _sports;
+            }
+        }
+
         #endregion
     }
 }
