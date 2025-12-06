@@ -1,9 +1,6 @@
 ﻿using Bimehcom.Core.Models.SubClients.PersonalAccident.Requests;
 using Bimehcom.Core.Models.SubClients.PersonalAccident.Responses;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Core.Interfaces.SubClients

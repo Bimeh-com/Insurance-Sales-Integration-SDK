@@ -1,11 +1,6 @@
 ﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.PersonalAccident.Requests;
 using Bimehcom.Core.Models.SubClients.PersonalAccident.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bimehcom.Samples
 {

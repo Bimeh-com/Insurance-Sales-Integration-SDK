@@ -43,4 +43,7 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new ElevatorInsuranceSamples(client).RunAsync();
 
 // Personal Accident Insurance
-await new PersonalAccidentInsuranceSamples(client).RunAsync();
+//await new PersonalAccidentInsuranceSamples(client).RunAsync();
+
+// Sports Insurance
+await new SportsInsuranceSamples(client).RunAsync();
