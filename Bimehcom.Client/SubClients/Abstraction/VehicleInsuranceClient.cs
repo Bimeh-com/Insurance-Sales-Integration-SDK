@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bimehcom.Client.SubClients.Abstraction
 {
-    internal class VehicleInsuranceClient : BaseSubClient, IVehicleInsuranceClient
+    internal abstract class VehicleInsuranceClient : BaseSubClient, IVehicleInsuranceClient
     {
         private readonly IHttpService _httpService;
         private readonly string _insuranceType;

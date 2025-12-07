@@ -35,5 +35,11 @@ namespace Bimehcom.Client.Extensions
         internal static string ExtraInsuredRequiredFileUpload(dynamic insuranceRequestId,Guid extraInsuredId) => $"insurance/{insuranceRequestId}/extra-insured/{extraInsuredId}/required-file";
 
 
+        internal static string GetEndorsementBasicData() => $"endorsement/basic-data";
+        internal static string CreateEndorsement() => $"endorsement/create";
+        internal static string GetEndorsementInformation(string endorsementId) => $"endorsement/{endorsementId}/info";
+        internal static string UploadEndorsementFile(string endorsementId) => $"endorsement/{endorsementId}/upload-and-confirm";
+        internal static string GetEndorsementPrintFile(string endorsementId) => $"endorsement/{endorsementId}/file";
+        internal static string EndorsementValidation(string endorsementId) => $"endorsement/{endorsementId}/validation";
     }
 }
