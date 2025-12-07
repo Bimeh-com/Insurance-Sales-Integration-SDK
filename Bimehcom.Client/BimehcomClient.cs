@@ -1,7 +1,8 @@
 ﻿using Bimehcom.Client.SubClients;
+using Bimehcom.Client.SubClients.Abstraction;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
-
+using Bimehcom.Core.Interfaces.SubClients.Base;
 namespace Bimehcom.Client
 {
     internal class BimehcomClient : IBimehcomClient
@@ -47,6 +48,18 @@ namespace Bimehcom.Client
                     lock (_lock)
                         _payment = new PaymentClient(_httpService);
                 return _payment;
+            }
+        }
+
+        private IEndorsementClient? _endorsement;
+        public IEndorsementClient Endorsement
+        {
+            get
+            {
+                if (_endorsement == null)
+                    lock (_lock)
+                        _endorsement = new EndorsementClient(_httpService);
+                return _endorsement;
             }
         }
 

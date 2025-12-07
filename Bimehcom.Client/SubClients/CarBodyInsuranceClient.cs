@@ -1,8 +1,6 @@
 ﻿using Bimehcom.Client.SubClients.Abstraction;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
-using Bimehcom.Core.Models.SubClients.Base.Endorsement.Requests;
-using Bimehcom.Core.Models.SubClients.Base.Endorsement.Responses;
 using Bimehcom.Core.Models.SubClients.CarBody.Requests;
 using Bimehcom.Core.Models.SubClients.CarBody.Responses;
 using System.IO;
@@ -35,11 +33,5 @@ namespace Bimehcom.Client.SubClients
         public async Task<CarBodyInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestId) => await base.GetPaymentGatewayOptionsAsync<CarBodyInsuranceGetGatewayOptionsResponse>((object)insuranceRequestId);
         public async Task<CarBodyInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestId, CarBodyInsuranceRedirectToGatewayRequest request) => await base.RedirectToPaymentGatewayAsync<CarBodyInsuranceRedirectToGatewayRequest, CarBodyInsuranceRedirectToGatewayResponse>((object)insuranceRequestId, request);
 
-        public async Task<GetEndorsementBasicDataResponse> GetEndorsementBasicDataAsync() => await base.GetEndorsementBasicDataAsync<GetEndorsementBasicDataResponse>();
-        public async Task CreateEndorsementAsync(CreateEndorsementRequest request) => await base.CreateEndorsementAsync<CreateEndorsementRequest>(request);
-        public async Task<GetEndorsementInformationResponse> GetEndorsementInformationAsync(string endorsementId) => await base.GetEndorsementInformationAsync<GetEndorsementInformationResponse>(endorsementId);
-        public async Task<UploadEndorsementFileResponse> UploadEndorsementRequiredFileAsync(string endoresementId, Stream fileStream, string fileName, string formFieldName) => await base.UploadEndorsementRequiredFileAsync<UploadEndorsementFileResponse>(endoresementId, fileStream, fileName, formFieldName);
-        public async Task<GetEndorsementPrintFileResponse> GetEndorsementPrintFileAsync(string endorsementId) => await base.GetEndorsementPrintFileAsync<GetEndorsementPrintFileResponse>(endorsementId);
-        public async Task<bool> EndorsementValidationAsync(string endorsementId) => await base.EndorsementValidationAsync<bool>(endorsementId);
     }
 }

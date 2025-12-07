@@ -16,7 +16,6 @@ namespace Bimehcom.Samples
 
         public async Task RunAsync()
         {
-
             // Basic Data
             CarBodyInsuranceBasicDataResponse basicData = await Client.CarBody.GetBasicDataAsync();
 

@@ -1,8 +1,6 @@
 ﻿using Bimehcom.Client.SubClients.Abstraction;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
-using Bimehcom.Core.Models.SubClients.Base.Endorsement.Requests;
-using Bimehcom.Core.Models.SubClients.Base.Endorsement.Responses;
 using Bimehcom.Core.Models.SubClients.CarThirdParty.Requests;
 using Bimehcom.Core.Models.SubClients.CarThirdParty.Responses;
 using System.IO;
@@ -35,12 +33,6 @@ namespace Bimehcom.Client.SubClients
         public async Task<CarThirdPartyInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestId, CarThirdPartyInsuranceRedirectToGatewayRequest request) => await base.RedirectToPaymentGatewayAsync<CarThirdPartyInsuranceRedirectToGatewayRequest, CarThirdPartyInsuranceRedirectToGatewayResponse>((object)insuranceRequestId, request);
 
 
-        public async Task<GetEndorsementBasicDataResponse> GetEndorsementBasicDataAsync() => await base.GetEndorsementBasicDataAsync<GetEndorsementBasicDataResponse>();
-        public async Task CreateEndorsementAsync(CreateEndorsementRequest request) => await base.CreateEndorsementAsync<CreateEndorsementRequest>(request);
-        public async Task<GetEndorsementInformationResponse> GetEndorsementInformationAsync(string endorsementId) => await base.GetEndorsementInformationAsync<GetEndorsementInformationResponse>(endorsementId);
-        public async Task<UploadEndorsementFileResponse> UploadEndorsementRequiredFileAsync(string endoresementId, Stream fileStream, string fileName, string formFieldName) => await base.UploadEndorsementRequiredFileAsync<UploadEndorsementFileResponse>(endoresementId, fileStream, fileName, formFieldName);
-        public async Task<GetEndorsementPrintFileResponse> GetEndorsementPrintFileAsync(string endorsementId) => await base.GetEndorsementPrintFileAsync<GetEndorsementPrintFileResponse>(endorsementId);
-        public async Task<bool> EndorsementValidationAsync(string endorsementId) => await base.EndorsementValidationAsync<bool>(endorsementId);
-
+   
     }
 }
