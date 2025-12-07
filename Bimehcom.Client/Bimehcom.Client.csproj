@@ -11,7 +11,6 @@
 		<Description>Insuracnce Sales Integrations SDK (C#)</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/Bimeh-com/Insurance-Sales-Integration-SDK</RepositoryUrl>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 
