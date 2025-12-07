@@ -88,20 +88,6 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.Pilgrimage.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            PilgrimageInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.Pilgrimage.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new PilgrimageInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            PilgrimageInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.Pilgrimage.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
         }
     }
 }

@@ -11,10 +11,10 @@ namespace Bimehcom.Client.SubClients.Abstraction
     {
         private readonly IHttpService _httpService;
         private readonly string InsuranceType;
-        public BaseSubClient(IHttpService httpService, string insuranceType)
+        public BaseSubClient(IHttpService httpService, string clientType)
         {
             _httpService = httpService;
-            InsuranceType = insuranceType;
+            InsuranceType = clientType;
         }
 
         public async Task<TResponse> GetBasicDataAsync<TResponse>()

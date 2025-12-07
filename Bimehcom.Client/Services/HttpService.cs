@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Bimehcom.Client.Services
 {
     internal class HttpService : IHttpService
     {
+        private readonly BimehcomClientOptions _options;
         private readonly HttpClient _httpClient;
 
         private Dictionary<string, string> _globalHeaders = new Dictionary<string, string>();
@@ -23,6 +25,7 @@ namespace Bimehcom.Client.Services
         public HttpService(BimehcomClientOptions options, HttpClient? httpClient = null)
         {
             var apiBaseUrl = new Uri(options.BaseApiUrl.AbsoluteUri + options.ApiVersion + "/");
+            _options = options;
             _httpClient = httpClient ?? HttpClientStore.GetOrCreate(apiBaseUrl);
         }
 
@@ -89,6 +92,36 @@ namespace Bimehcom.Client.Services
                 ValidateResponse(response, json);
 
                 return JsonSerializer.Deserialize<TResponse>(json);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                return default;
+            }
+        }
+
+        public async Task<bool> PostEncryptedPaymentInformation(string url, dynamic data, Dictionary<string, string>? customHeaders = null)
+        {
+            try
+            {
+                var encryptedData = new
+                {
+                    EncryptedData = RsaCryptographyService.Encrypt(JsonSerializer.Serialize(data), _options.PublicKey)
+                };
+
+                ApplyGlobalHeaders(customHeaders);
+
+                var jsonContent = new StringContent(JsonSerializer.Serialize(encryptedData), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync(url, jsonContent);
+                var json = await response.Content.ReadAsStringAsync();
+
+                ValidateResponse(response, json);
+                if (response.StatusCode == System.Net.HttpStatusCode.Redirect)
+                {
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {

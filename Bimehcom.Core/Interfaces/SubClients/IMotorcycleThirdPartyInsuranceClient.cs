@@ -19,7 +19,6 @@ namespace Bimehcom.Core.Interfaces.SubClients
         Task<MotorcycleThirdPartyInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestid, MotorcycleThirdPartyInsuranceDeliveryDateTimeRequest request);
         Task<MotorcycleThirdPartyInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestid, MotorcycleThirdPartyInsuranceSetLogisticsRequirementsRequest request);
         Task<bool> ValidationAsync(dynamic insuranceRequestid);
-        Task<MotorcycleThirdPartyInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestid);
-        Task<MotorcycleThirdPartyInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestid, MotorcycleThirdPartyInsuranceRedirectToGatewayRequest request);
+
     }
 }

@@ -113,19 +113,5 @@ internal class MedicalLiabilityInsuranceSamples
         // Validate
         var validationResult = await Client.MedicalLiability.ValidationAsync(insuranceRequestId);
 
-        // Get Gateway Options
-        MedicalLiabilityInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.MedicalLiability.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-        // Redirect to Payment Gateway
-        var redirectToGatewayRequest = new MedicalLiabilityInsuranceRedirectToGatewayRequest
-        {
-            GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-            FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-            SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-        };
-
-        MedicalLiabilityInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.MedicalLiability.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
     }
 }

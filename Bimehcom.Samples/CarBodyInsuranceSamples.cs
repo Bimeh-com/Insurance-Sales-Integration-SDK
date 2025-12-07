@@ -138,20 +138,6 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.CarBody.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            CarBodyInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.CarBody.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new CarBodyInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            CarBodyInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.CarBody.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
         }
     }
 }

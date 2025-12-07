@@ -99,20 +99,6 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.Fire.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            FireInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.Fire.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new FireInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            FireInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.Fire.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
         }
     }
 }

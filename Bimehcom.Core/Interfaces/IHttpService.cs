@@ -16,5 +16,6 @@ namespace Bimehcom.Core.Interfaces
         Task<TResponse> GetAsync<TResponse>(string url);
         Task<TResponse> GetAsync<TResponse>(string url, Dictionary<string, string>? customHeaders = null);
         void AddGlobalHeader(string name, string value);
+        Task<bool> PostEncryptedPaymentInformation(string url, dynamic encryptedData, Dictionary<string, string>? customHeaders = null);
     }
 }

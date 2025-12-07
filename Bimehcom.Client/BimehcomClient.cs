@@ -38,6 +38,17 @@ namespace Bimehcom.Client
                 return _user;
             }
         }
+        private IPaymentClient? _payment;
+        public IPaymentClient Payment
+        {
+            get
+            {
+                if (_payment == null)
+                    lock (_lock)
+                        _payment = new PaymentClient(_httpService);
+                return _payment;
+            }
+        }
 
         private ICarThirdPartyInsuranceClient? _carThirdParty;
         public ICarThirdPartyInsuranceClient CarThirdParty

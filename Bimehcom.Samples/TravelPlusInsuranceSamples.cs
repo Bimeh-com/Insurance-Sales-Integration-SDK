@@ -90,20 +90,6 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.TravelPlus.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            TravelPlusInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.TravelPlus.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new TravelPlusInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            TravelPlusInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.TravelPlus.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
         }
     }
 }
