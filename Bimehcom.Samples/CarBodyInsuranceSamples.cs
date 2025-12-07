@@ -111,7 +111,7 @@ namespace Bimehcom.Samples
             CarBodyInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.CarBody.LogisticsRequirementsAsync(insuranceRequestId);
 
             // Delivery Addresses
-            CarBodyInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.CarBody.DeliveryAddressesAsync(insuranceRequestId);
+            CarBodyInsuranceDeliveryAddressesResponse deliveryAddresses = await Client.CarBody.DeliveryAddressesAsync(insuranceRequestId);
 
             var deliveryDateTimeRequest = new CarBodyInsuranceDeliveryDateTimeRequest
             {

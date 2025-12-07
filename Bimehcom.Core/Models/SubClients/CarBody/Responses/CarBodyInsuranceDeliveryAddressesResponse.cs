@@ -3,7 +3,7 @@ using Bimehcom.Core.Models.Base.DeliveryAddress;
 
 namespace Bimehcom.Core.Models.SubClients.CarBody.Responses
 {
-    public class CarBodyInsuranceDevlieryAddressesResponse : DeliveryAddressResponse, IBimehcomApiResponse
+    public class CarBodyInsuranceDeliveryAddressesResponse : DeliveryAddressResponse, IBimehcomApiResponse
     {
     }
 }

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Client.Services
@@ -19,7 +20,6 @@ namespace Bimehcom.Client.Services
         private readonly HttpClient _httpClient;
 
         private Dictionary<string, string> _globalHeaders = new Dictionary<string, string>();
-
 
         public HttpService(BimehcomClientOptions options, HttpClient? httpClient = null)
         {
@@ -32,6 +32,7 @@ namespace Bimehcom.Client.Services
         {
             _globalHeaders.Add(name, value);
         }
+
         private void ApplyGlobalHeaders(Dictionary<string, string>? customHeaders = null)
         {
             _httpClient.DefaultRequestHeaders.Clear();
@@ -50,17 +51,18 @@ namespace Bimehcom.Client.Services
             }
         }
 
-        public async Task<TResponse> GetAsync<TResponse>(string url)
+        public async Task<TResponse> GetAsync<TResponse>(string url, CancellationToken cancellationToken = default)
         {
-            return await GetAsync<TResponse>(url, null);
+            return await GetAsync<TResponse>(url, null, cancellationToken);
         }
-        public async Task<TResponse> GetAsync<TResponse>(string url, Dictionary<string, string>? customHeaders = null)
+
+        public async Task<TResponse> GetAsync<TResponse>(string url, Dictionary<string, string>? customHeaders = null, CancellationToken cancellationToken = default)
         {
             try
             {
                 ApplyGlobalHeaders(customHeaders);
 
-                var response = await _httpClient.GetAsync(url);
+                var response = await _httpClient.GetAsync(url, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -74,18 +76,19 @@ namespace Bimehcom.Client.Services
             }
         }
 
-        public async Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body)
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body, CancellationToken cancellationToken = default)
         {
-            return await PostAsync<TRequest, TResponse>(url, body, null);
+            return await PostAsync<TRequest, TResponse>(url, body, null, cancellationToken);
         }
-        public async Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null)
+
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null, CancellationToken cancellationToken = default)
         {
             try
             {
                 ApplyGlobalHeaders(customHeaders);
 
                 var jsonContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync(url, jsonContent);
+                var response = await _httpClient.PostAsync(url, jsonContent, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -99,7 +102,7 @@ namespace Bimehcom.Client.Services
             }
         }
 
-        public async Task<bool> PostEncryptedPaymentInformation(string url, dynamic data, Dictionary<string, string>? customHeaders = null)
+        public async Task<bool> PostEncryptedPaymentInformation(string url, dynamic data, Dictionary<string, string>? customHeaders = null, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -111,7 +114,7 @@ namespace Bimehcom.Client.Services
                 ApplyGlobalHeaders(customHeaders);
 
                 var jsonContent = new StringContent(JsonSerializer.Serialize(encryptedData), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync(url, jsonContent);
+                var response = await _httpClient.PostAsync(url, jsonContent, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -128,7 +131,8 @@ namespace Bimehcom.Client.Services
                 return default;
             }
         }
-        public async Task<TResponse> PostFileAsync<TResponse>(string url, Stream fileStream, string fileName, string formFieldName, Dictionary<string, string>? customHeaders = null)
+
+        public async Task<TResponse> PostFileAsync<TResponse>(string url, Stream fileStream, string fileName, string formFieldName, Dictionary<string, string>? customHeaders = null, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -140,7 +144,7 @@ namespace Bimehcom.Client.Services
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 form.Add(fileContent, formFieldName, fileName);
 
-                var response = await _httpClient.PostAsync(url, form);
+                var response = await _httpClient.PostAsync(url, form, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -154,18 +158,19 @@ namespace Bimehcom.Client.Services
             }
         }
 
-        public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body)
+        public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body, CancellationToken cancellationToken = default)
         {
-            return await PutAsync<TRequest, TResponse>(url, body, null);
+            return await PutAsync<TRequest, TResponse>(url, body, null, cancellationToken);
         }
-        public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null)
+
+        public async Task<TResponse> PutAsync<TRequest, TResponse>(string url, TRequest body, Dictionary<string, string>? customHeaders = null, CancellationToken cancellationToken = default)
         {
             try
             {
                 ApplyGlobalHeaders(customHeaders);
 
                 var jsonContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PutAsync(url, jsonContent);
+                var response = await _httpClient.PutAsync(url, jsonContent, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -179,17 +184,18 @@ namespace Bimehcom.Client.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(string url)
+        public async Task<bool> DeleteAsync(string url, CancellationToken cancellationToken = default)
         {
-            return await DeleteAsync(url, null);
+            return await DeleteAsync(url, null, cancellationToken);
         }
-        public async Task<bool> DeleteAsync(string url, Dictionary<string, string>? customHeaders = null)
+
+        public async Task<bool> DeleteAsync(string url, Dictionary<string, string>? customHeaders = null, CancellationToken cancellationToken = default)
         {
             try
             {
                 ApplyGlobalHeaders(customHeaders);
 
-                var response = await _httpClient.DeleteAsync(url);
+                var response = await _httpClient.DeleteAsync(url, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -205,6 +211,9 @@ namespace Bimehcom.Client.Services
 
         private void HandleException(Exception ex)
         {
+            if (ex is OperationCanceledException)
+                throw ex;
+
             if (ex is HttpRequestException)
                 throw new BimehcomHttpException("Something went wrong while making the HTTP request.", ex);
             else if (ex is TaskCanceledException)
@@ -221,7 +230,7 @@ namespace Bimehcom.Client.Services
             {
                 var apiExceptionResponse = JsonSerializer.Deserialize<ApiExceptionResponse>(json);
 
-                throw new BimehcomApiException((int)response.StatusCode, apiExceptionResponse.Message);
+                throw new BimehcomApiException((int)response.StatusCode, apiExceptionResponse?.Message ?? "API error");
             }
             else if (!response.IsSuccessStatusCode)
             {

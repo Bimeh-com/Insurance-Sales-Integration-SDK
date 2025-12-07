@@ -1,24 +1,24 @@
 ﻿using Bimehcom.Core.Models.SubClients.Sports.Requests;
 using Bimehcom.Core.Models.SubClients.Sports.Responses;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Core.Interfaces.SubClients
 {
     public interface ISportsInsuranceClient
     {
-        Task<SportsInsuranceBasicDataResponse> GetBasicDataAsync();
-        Task<SportsInsuranceInquiryResponse> InquiryAsync(SportsInsuranceInquiryRequest request);
-        Task<SportsInsuranceCreateResponse> CreateAsync(SportsInsuranceCreateRequest request);
-        Task<SportsInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestid);
-        Task<SportsInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestid, SportsInsuranceSetInfoRequest request);
-        Task<SportsInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestid);
-        Task<SportsInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName);
-        Task<SportsInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestid);
-        Task<SportsInsuranceDevlieryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestid);
-        Task<SportsInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestid, SportsInsuranceDeliveryDateTimeRequest request);
-        Task<SportsInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestid, SportsInsuranceSetLogisticsRequirementsRequest request);
-        Task<bool> ValidationAsync(dynamic insuranceRequestid);
-
+        Task<SportsInsuranceBasicDataResponse> GetBasicDataAsync(CancellationToken cancellationToken = default);
+        Task<SportsInsuranceInquiryResponse> InquiryAsync(SportsInsuranceInquiryRequest request, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceCreateResponse> CreateAsync(SportsInsuranceCreateRequest request, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestId, SportsInsuranceSetInfoRequest request, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceDeliveryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestId, SportsInsuranceDeliveryDateTimeRequest request, CancellationToken cancellationToken = default);
+        Task<SportsInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestId, SportsInsuranceSetLogisticsRequirementsRequest request, CancellationToken cancellationToken = default);
+        Task<bool> ValidationAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
     }
 }

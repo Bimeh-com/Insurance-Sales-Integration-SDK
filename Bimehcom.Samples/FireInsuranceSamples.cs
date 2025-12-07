@@ -73,7 +73,7 @@ namespace Bimehcom.Samples
             FireInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.Fire.LogisticsRequirementsAsync(insuranceRequestId);
 
             // Delivery Addresses
-            FireInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.Fire.DeliveryAddressesAsync(insuranceRequestId);
+            FireInsuranceDeliveryAddressesResponse deliveryAddresses = await Client.Fire.DeliveryAddressesAsync(insuranceRequestId);
 
             var deliveryDateTimeRequest = new FireInsuranceDeliveryDateTimeRequest
             {
