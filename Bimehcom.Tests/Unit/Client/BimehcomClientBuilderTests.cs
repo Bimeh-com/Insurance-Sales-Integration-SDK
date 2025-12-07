@@ -15,6 +15,7 @@ namespace Bimehcom.Tests.Unit.Client
                 opts.ApiKey = "test-key";
                 opts.BaseApiUrl = new Uri("https://example.com");
                 opts.ApiVersion = "v1";
+                opts.PublicKey = "<RSAKeyValue></RSAKeyValue>";
             });
 
             Action act = () => new BimehcomClientBuilder(builderAction);
@@ -30,6 +31,7 @@ namespace Bimehcom.Tests.Unit.Client
                 opts.ApiKey = null;
                 opts.BaseApiUrl = new Uri("https://example.com");
                 opts.ApiVersion = "v1";
+                opts.PublicKey = "<RSAKeyValue></RSAKeyValue>";
             });
 
             Action act = () => new BimehcomClientBuilder(builderAction);
@@ -46,6 +48,7 @@ namespace Bimehcom.Tests.Unit.Client
                 opts.ApiKey = "key";
                 opts.BaseApiUrl = new Uri("https://example.com");
                 opts.ApiVersion = "v1";
+                opts.PublicKey = "<RSAKeyValue></RSAKeyValue>";
             });
 
             var builder = new BimehcomClientBuilder(builderAction);

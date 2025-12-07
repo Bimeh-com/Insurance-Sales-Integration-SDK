@@ -1,16 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
 
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="10.0.0" />
-  </ItemGroup>
+		<PackageId>BimehcomInsuranceSalesIntegrationSDK</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Bimeh.com</Authors>
+		<Company>Bimeh.com</Company>
+		<Description>Insuracnce Sales Integrations SDK (C#)</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/Bimeh-com/Insurance-Sales-Integration-SDK</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Bimehcom.Core\Bimehcom.Core.csproj" />
-  </ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Bimehcom.Core\Bimehcom.Core.csproj" />
+	</ItemGroup>
 
 </Project>

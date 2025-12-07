@@ -1,7 +1,6 @@
 ﻿using Bimehcom.Client;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
-using Bimehcom.Samples;
 
 IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 {

@@ -13,7 +13,8 @@ namespace Bimehcom.Tests.Unit.Core
             {
                 ApiKey = "test",
                 BaseApiUrl = null,
-                ApiVersion = "v2"
+                ApiVersion = "v2",
+                PublicKey = "<RSAKeyValue></RSAKeyValue>"
             };
 
             options.EnsureValid();
@@ -28,7 +29,8 @@ namespace Bimehcom.Tests.Unit.Core
             {
                 ApiKey = "test",
                 BaseApiUrl = new Uri("https://example.com"),
-                ApiVersion = null
+                ApiVersion = null,
+                PublicKey = "<RSAKeyValue></RSAKeyValue>"
             };
 
             options.EnsureValid();
@@ -43,7 +45,8 @@ namespace Bimehcom.Tests.Unit.Core
             {
                 ApiKey = null,
                 BaseApiUrl = new Uri("https://example.com"),
-                ApiVersion = "v1"
+                ApiVersion = "v1",
+                PublicKey = "<RSAKeyValue></RSAKeyValue>"
             };
 
             Action act = () => options.EnsureValid();
@@ -63,7 +66,8 @@ namespace Bimehcom.Tests.Unit.Core
             {
                 ApiKey = "test",
                 BaseApiUrl = new Uri("/relative/path", UriKind.Relative),
-                ApiVersion = "v1"
+                ApiVersion = "v1",
+                PublicKey = "<RSAKeyValue></RSAKeyValue>"
             };
 
             Action act = () => options.EnsureValid();
@@ -78,7 +82,8 @@ namespace Bimehcom.Tests.Unit.Core
             {
                 ApiKey = "test",
                 BaseApiUrl = new Uri("https://example.com"),
-                ApiVersion = "1"
+                ApiVersion = "1",
+                PublicKey = "<RSAKeyValue></RSAKeyValue>"
             };
 
             Action act = () => options.EnsureValid();
@@ -93,7 +98,8 @@ namespace Bimehcom.Tests.Unit.Core
             {
                 ApiKey = "key",
                 BaseApiUrl = new Uri("https://example.com"),
-                ApiVersion = "v2"
+                ApiVersion = "v2",
+                PublicKey = "<RSAKeyValue></RSAKeyValue>"
             };
 
             Action act = () => options.EnsureValid();
