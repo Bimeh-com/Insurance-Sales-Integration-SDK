@@ -4,6 +4,6 @@
     {
         public string TrackingCode { get; set; }
         public decimal Amount { get; set; }
-        public dynamic endorsementId { get; set; }
+        public string endorsementId { get; set; }
     }
 }
