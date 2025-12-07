@@ -86,19 +86,7 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.MotorcycleThirdParty.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            MotorcycleThirdPartyInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.MotorcycleThirdParty.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new MotorcycleThirdPartyInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            MotorcycleThirdPartyInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.MotorcycleThirdParty.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
+         
         }
     }
 }

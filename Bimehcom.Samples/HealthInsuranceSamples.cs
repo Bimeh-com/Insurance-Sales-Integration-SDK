@@ -143,21 +143,6 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.Health.ValidationAsync(insuranceRequestId);
-
-            // Get Gateway Options
-            HealthInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.Health.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new HealthInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            HealthInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.Health.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
         }
     }
 }

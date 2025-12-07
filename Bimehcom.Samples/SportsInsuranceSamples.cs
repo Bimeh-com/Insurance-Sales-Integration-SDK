@@ -86,20 +86,6 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.Sports.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            SportsInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.Sports.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new SportsInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            SportsInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.Sports.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
-
         }
 
     }

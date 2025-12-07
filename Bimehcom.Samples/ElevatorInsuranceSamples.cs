@@ -106,19 +106,6 @@ namespace Bimehcom.Samples
             // Validate
             var validationResult = await Client.Elevator.ValidationAsync(insuranceRequestId);
 
-            // Get Gateway Options
-            ElevatorInsuranceGetGatewayOptionsResponse paymentGatewayOptions = await Client.Elevator.GetPaymentGatewayOptionsAsync(insuranceRequestId);
-
-
-            // Redirect to Payment Gateway
-            var redirectToGatewayRequest = new ElevatorInsuranceRedirectToGatewayRequest
-            {
-                GatewayId = paymentGatewayOptions.Gateways.FirstOrDefault()?.Id,
-                FaildReturnURL = $"https://bimeh.com/ins/paymentfailed?id={(object)insuranceRequestId}",
-                SuccessReturnURL = $"https://bimeh.com/ins/paymentconfirm?id={(object)insuranceRequestId}"
-            };
-
-            ElevatorInsuranceRedirectToGatewayResponse redirectToGatewayResponse = await Client.Elevator.RedirectToPaymentGatewayAsync(insuranceRequestId, redirectToGatewayRequest);
 
         }
 

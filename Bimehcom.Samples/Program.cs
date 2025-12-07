@@ -6,6 +6,7 @@ using Bimehcom.Samples;
 IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 {
     opt.ApiKey = "da4aa2f8-70d9-4d56-b577-3162dfae2c0f";
+    opt.PublicKey = "<RSAKeyValue></RSAKeyValue>";
 }).Build();
 
 #region Authentication
@@ -52,4 +53,4 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new PilgrimageInsuranceSamples(client).RunAsync();
 
 // Travel Plus Insurance
-await new TravelPlusInsuranceSamples(client).RunAsync();
+//await new TravelPlusInsuranceSamples(client).RunAsync();

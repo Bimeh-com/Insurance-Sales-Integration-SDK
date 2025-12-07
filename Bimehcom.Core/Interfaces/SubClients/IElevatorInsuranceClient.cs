@@ -19,7 +19,5 @@ namespace Bimehcom.Core.Interfaces.SubClients
         Task<ElevatorInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestid, ElevatorInsuranceDeliveryDateTimeRequest request);
         Task<ElevatorInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestid, ElevatorInsuranceSetLogisticsRequirementsRequest request);
         Task<bool> ValidationAsync(dynamic insuranceRequestid);
-        Task<ElevatorInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestid);
-        Task<ElevatorInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestid, ElevatorInsuranceRedirectToGatewayRequest request);
     }
 }

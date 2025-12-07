@@ -11,6 +11,7 @@ namespace Bimehcom.Core.Options
         public string ApiKey { get; set; }
         public Uri BaseApiUrl { get; set; }
         public string ApiVersion { get; set; }
+        public string PublicKey { get; set; }
 
         public void EnsureValid()
         {
@@ -27,6 +28,10 @@ namespace Bimehcom.Core.Options
             if (string.IsNullOrWhiteSpace(ApiKey))
             {
                 throw new BimehcomException("ApiKey must be provided in BimehcomClientOptions.");
+            }
+            if (string.IsNullOrWhiteSpace(PublicKey))
+            {
+                throw new BimehcomException("PublicKey must be provided in BimehcomClientOptions.");
             }
 
             if (!BaseApiUrl.IsAbsoluteUri)

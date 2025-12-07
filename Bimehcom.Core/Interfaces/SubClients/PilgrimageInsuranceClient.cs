@@ -19,7 +19,6 @@ namespace Bimehcom.Core.Interfaces.SubClients
         Task<PilgrimageInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestid, PilgrimageInsuranceDeliveryDateTimeRequest request);
         Task<PilgrimageInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestid, PilgrimageInsuranceSetLogisticsRequirementsRequest request);
         Task<bool> ValidationAsync(dynamic insuranceRequestid);
-        Task<PilgrimageInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestid);
-        Task<PilgrimageInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestid, PilgrimageInsuranceRedirectToGatewayRequest request);
+
     }
 }

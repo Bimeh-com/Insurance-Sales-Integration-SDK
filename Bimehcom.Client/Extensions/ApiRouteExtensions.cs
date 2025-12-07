@@ -41,5 +41,11 @@ namespace Bimehcom.Client.Extensions
         internal static string UploadEndorsementFile(string endorsementId) => $"endorsement/{endorsementId}/upload-and-confirm";
         internal static string GetEndorsementPrintFile(string endorsementId) => $"endorsement/{endorsementId}/file";
         internal static string EndorsementValidation(string endorsementId) => $"endorsement/{endorsementId}/validation";
+
+
+        internal static string SubmitInsuranceRequestPaymentInformationAsync(string insuranceRequestId) => $"payment/accept/encrypted/{insuranceRequestId}";
+        internal static string SubmitEndorsementPaymentInformationAsync(string endorsementId) => $"payment/accept/encrypted/endorsement/{endorsementId}";
+
+
     }
 }
