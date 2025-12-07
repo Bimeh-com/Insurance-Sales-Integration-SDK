@@ -80,7 +80,7 @@ namespace Bimehcom.Samples
             ElevatorInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.Elevator.LogisticsRequirementsAsync(insuranceRequestId);
 
             // Delivery Addresses
-            ElevatorInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.Elevator.DeliveryAddressesAsync(insuranceRequestId);
+            ElevatorInsuranceDeliveryAddressesResponse deliveryAddresses = await Client.Elevator.DeliveryAddressesAsync(insuranceRequestId);
 
             var deliveryDateTimeRequest = new ElevatorInsuranceDeliveryDateTimeRequest
             {

@@ -4,6 +4,7 @@ using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.SubClients.CarBody.Requests;
 using Bimehcom.Core.Models.SubClients.CarBody.Responses;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Client.SubClients
@@ -17,21 +18,49 @@ namespace Bimehcom.Client.SubClients
             _httpService = httpService;
         }
 
-        public async Task<CarBodyInsuranceBasicDataResponse> GetBasicDataAsync() => await base.GetBasicDataAsync<CarBodyInsuranceBasicDataResponse>();
-        public async Task<CarBodyInsuranceInquiryResponse> InquiryAsync(CarBodyInsuranceInquiryRequest request) => await base.InquiryAsync<CarBodyInsuranceInquiryRequest, CarBodyInsuranceInquiryResponse>(request);
-        public async Task<CarBodyInsuranceGetInstallmentsResponse> GetInstallmentsAsync(CarBodyInsuranceGetInstallmentsRequest request) => await base.GetInstallmentsAsync<CarBodyInsuranceGetInstallmentsRequest, CarBodyInsuranceGetInstallmentsResponse>(request);
-        public async Task<CarBodyInsuranceCreateResponse> CreateAsync(CarBodyInsuranceCreateRequest request) => await base.CreateAsync<CarBodyInsuranceCreateRequest, CarBodyInsuranceCreateResponse>(request);
-        public async Task<CarBodyInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId) => await base.GetInfoAsync<CarBodyInsuranceInfoResponse>((object)insuranceRequestId);
-        public async Task<CarBodyInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestId, CarBodyInsuranceSetInfoRequest request) => await base.SetInfoAsync<CarBodyInsuranceSetInfoRequest, CarBodyInsuranceSetInfoResponse>((object)insuranceRequestId, request);
-        public async Task<CarBodyInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestId) => await base.RequiredFileAsync<CarBodyInsuranceRequiredFileResponse>((object)insuranceRequestId);
-        public async Task<CarBodyInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName) => await base.UploadRequiredFileAsync<CarBodyInsuranceUploadRequiredFileResponse>((object)insuranceRequestId, fileStream, fileName, formFieldName);
-        public async Task<CarBodyInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestId) => await base.LogisticsRequirementsAsync<CarBodyInsuranceLogisticsRequirementsResponse>((object)insuranceRequestId);
-        public async Task<CarBodyInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestId, CarBodyInsuranceSetLogisticsRequirementsRequest request) => await base.SetLogisticsRequirementsAsync<CarBodyInsuranceSetLogisticsRequirementsRequest, CarBodyInsuranceSetLogisticsRequirementsResponse>((object)insuranceRequestId, request);
-        public async Task<CarBodyInsuranceDevlieryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestId) => await base.DeliveryAddressesAsync<CarBodyInsuranceDevlieryAddressesResponse>((object)insuranceRequestId);
-        public async Task<CarBodyInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestId, CarBodyInsuranceDeliveryDateTimeRequest request) => await base.DeliveryDateTimeAsync<CarBodyInsuranceDeliveryDateTimeRequest, CarBodyInsuranceDeliveryDateTimeResponse>((object)insuranceRequestId, request);
-        public async Task<bool> ValidationAsync(dynamic insuranceRequestId) => await base.ValidationAsync<bool>((object)insuranceRequestId);
-        public async Task<CarBodyInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestId) => await base.GetPaymentGatewayOptionsAsync<CarBodyInsuranceGetGatewayOptionsResponse>((object)insuranceRequestId);
-        public async Task<CarBodyInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestId, CarBodyInsuranceRedirectToGatewayRequest request) => await base.RedirectToPaymentGatewayAsync<CarBodyInsuranceRedirectToGatewayRequest, CarBodyInsuranceRedirectToGatewayResponse>((object)insuranceRequestId, request);
+        public async Task<CarBodyInsuranceBasicDataResponse> GetBasicDataAsync(CancellationToken cancellationToken = default) =>
+            await base.GetBasicDataAsync<CarBodyInsuranceBasicDataResponse>(cancellationToken);
 
+        public async Task<CarBodyInsuranceInquiryResponse> InquiryAsync(CarBodyInsuranceInquiryRequest request, CancellationToken cancellationToken = default) =>
+            await base.InquiryAsync<CarBodyInsuranceInquiryRequest, CarBodyInsuranceInquiryResponse>(request, cancellationToken);
+
+        public async Task<CarBodyInsuranceGetInstallmentsResponse> GetInstallmentsAsync(CarBodyInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default) =>
+            await base.GetInstallmentsAsync<CarBodyInsuranceGetInstallmentsRequest, CarBodyInsuranceGetInstallmentsResponse>(request, cancellationToken);
+
+        public async Task<CarBodyInsuranceCreateResponse> CreateAsync(CarBodyInsuranceCreateRequest request, CancellationToken cancellationToken = default) =>
+            await base.CreateAsync<CarBodyInsuranceCreateRequest, CarBodyInsuranceCreateResponse>(request, cancellationToken);
+
+        public async Task<CarBodyInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await base.GetInfoAsync<CarBodyInsuranceInfoResponse>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<CarBodyInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestId, CarBodyInsuranceSetInfoRequest request, CancellationToken cancellationToken = default) =>
+            await base.SetInfoAsync<CarBodyInsuranceSetInfoRequest, CarBodyInsuranceSetInfoResponse>((object)insuranceRequestId, request, cancellationToken);
+
+        public async Task<CarBodyInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await base.RequiredFileAsync<CarBodyInsuranceRequiredFileResponse>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<CarBodyInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName, CancellationToken cancellationToken = default) =>
+            await base.UploadRequiredFileAsync<CarBodyInsuranceUploadRequiredFileResponse>((object)insuranceRequestId, fileStream, fileName, formFieldName, cancellationToken);
+
+        public async Task<CarBodyInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await base.LogisticsRequirementsAsync<CarBodyInsuranceLogisticsRequirementsResponse>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<CarBodyInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestId, CarBodyInsuranceSetLogisticsRequirementsRequest request, CancellationToken cancellationToken = default) =>
+            await base.SetLogisticsRequirementsAsync<CarBodyInsuranceSetLogisticsRequirementsRequest, CarBodyInsuranceSetLogisticsRequirementsResponse>((object)insuranceRequestId, request, cancellationToken);
+
+        public async Task<CarBodyInsuranceDeliveryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await base.DeliveryAddressesAsync<CarBodyInsuranceDeliveryAddressesResponse>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<CarBodyInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestId, CarBodyInsuranceDeliveryDateTimeRequest request, CancellationToken cancellationToken = default) =>
+            await base.DeliveryDateTimeAsync<CarBodyInsuranceDeliveryDateTimeRequest, CarBodyInsuranceDeliveryDateTimeResponse>((object)insuranceRequestId, request, cancellationToken);
+
+        public async Task<bool> ValidationAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await base.ValidationAsync<bool>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<CarBodyInsuranceGetGatewayOptionsResponse> GetPaymentGatewayOptionsAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await base.GetPaymentGatewayOptionsAsync<CarBodyInsuranceGetGatewayOptionsResponse>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<CarBodyInsuranceRedirectToGatewayResponse> RedirectToPaymentGatewayAsync(dynamic insuranceRequestId, CarBodyInsuranceRedirectToGatewayRequest request, CancellationToken cancellationToken = default) =>
+            await base.RedirectToPaymentGatewayAsync<CarBodyInsuranceRedirectToGatewayRequest, CarBodyInsuranceRedirectToGatewayResponse>((object)insuranceRequestId, request, cancellationToken);
     }
 }

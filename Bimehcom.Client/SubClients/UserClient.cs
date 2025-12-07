@@ -2,6 +2,7 @@
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.SubClients.User.Responses;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Client.SubClients
@@ -15,14 +16,14 @@ namespace Bimehcom.Client.SubClients
             _httpService = httpService;
         }
 
-        public async Task<GetUserAddressesResponse> GetAddressesAsync()
+        public async Task<GetUserAddressesResponse> GetAddressesAsync(CancellationToken cancellationToken = default)
         {
-            return await _httpService.GetAsync<GetUserAddressesResponse>(ApiRoutes.GetUserAddresses());
+            return await _httpService.GetAsync<GetUserAddressesResponse>(ApiRoutes.GetUserAddresses(), cancellationToken);
         }
 
-        public async Task<GetUserPolicyOwnersResponse> GetPolicyOwnersAsync()
+        public async Task<GetUserPolicyOwnersResponse> GetPolicyOwnersAsync(CancellationToken cancellationToken = default)
         {
-            return await _httpService.GetAsync<GetUserPolicyOwnersResponse>(ApiRoutes.GetUserPolicyOwners());
+            return await _httpService.GetAsync<GetUserPolicyOwnersResponse>(ApiRoutes.GetUserPolicyOwners(), cancellationToken);
         }
     }
 }

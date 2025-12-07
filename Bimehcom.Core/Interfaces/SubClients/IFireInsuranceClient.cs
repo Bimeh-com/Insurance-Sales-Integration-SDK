@@ -1,21 +1,22 @@
 ﻿using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Core.Interfaces.SubClients
 {
     public interface IFireInsuranceClient
     {
-        Task<FireInsuranceBasicDataResponse> GetBasicDataAsync();
-        Task<FireInsuranceInquiryResponse> InquiryAsync(FireInsuranceInquiryRequest request);
-        Task<FireInsuranceCreateResponse> CreateAsync(FireInsuranceCreateRequest request);
-        Task<FireInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestid);
-        Task<FireInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestid,FireInsuranceSetInfoRequest request);
-        Task<FireInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestid);
-        Task<FireInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestid);
-        Task<FireInsuranceDevlieryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestid);
-        Task<FireInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestid, FireInsuranceDeliveryDateTimeRequest request);
-        Task<FireInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestid, FireInsuranceSetLogisticsRequirementsRequest request);
-        Task<bool> ValidationAsync(dynamic insuranceRequestid);
+        Task<FireInsuranceBasicDataResponse> GetBasicDataAsync(CancellationToken cancellationToken = default);
+        Task<FireInsuranceInquiryResponse> InquiryAsync(FireInsuranceInquiryRequest request, CancellationToken cancellationToken = default);
+        Task<FireInsuranceCreateResponse> CreateAsync(FireInsuranceCreateRequest request, CancellationToken cancellationToken = default);
+        Task<FireInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<FireInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestId, FireInsuranceSetInfoRequest request, CancellationToken cancellationToken = default);
+        Task<FireInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<FireInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<FireInsuranceDeliveryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<FireInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestId, FireInsuranceDeliveryDateTimeRequest request, CancellationToken cancellationToken = default);
+        Task<FireInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestId, FireInsuranceSetLogisticsRequirementsRequest request, CancellationToken cancellationToken = default);
+        Task<bool> ValidationAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
     }
 }

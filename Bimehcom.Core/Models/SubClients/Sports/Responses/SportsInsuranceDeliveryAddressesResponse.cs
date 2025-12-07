@@ -3,7 +3,7 @@ using Bimehcom.Core.Models.Base.DeliveryAddress;
 
 namespace Bimehcom.Core.Models.SubClients.Sports.Responses
 {
-    public class SportsInsuranceDevlieryAddressesResponse : DeliveryAddressResponse, IBimehcomApiResponse
+    public class SportsInsuranceDeliveryAddressesResponse : DeliveryAddressResponse, IBimehcomApiResponse
     {
     }
 }

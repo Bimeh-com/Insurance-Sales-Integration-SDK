@@ -3,7 +3,7 @@ using Bimehcom.Core.Models.Base.DeliveryAddress;
 
 namespace Bimehcom.Core.Models.SubClients.TravelPlus.Responses
 {
-    public class TravelPlusInsuranceDevlieryAddressesResponse : DeliveryAddressResponse, IBimehcomApiResponse
+    public class TravelPlusInsuranceDeliveryAddressesResponse : DeliveryAddressResponse, IBimehcomApiResponse
     {
     }
 }

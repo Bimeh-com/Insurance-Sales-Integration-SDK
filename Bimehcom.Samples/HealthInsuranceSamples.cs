@@ -118,7 +118,7 @@ namespace Bimehcom.Samples
             HealthInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.Health.LogisticsRequirementsAsync(insuranceRequestId);
 
             // Delivery Addresses
-            HealthInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.Health.DeliveryAddressesAsync(insuranceRequestId);
+            HealthInsuranceDeliveryAddressesResponse deliveryAddresses = await Client.Health.DeliveryAddressesAsync(insuranceRequestId);
 
             var deliveryDateTimeRequest = new HealthInsuranceDeliveryDateTimeRequest
             {

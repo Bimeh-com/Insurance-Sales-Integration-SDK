@@ -72,7 +72,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             var service = CreateService(response);
 
-            var result = await service.GetAsync<TestGetResponse>("test");
+            var result = await service.GetAsync<TestGetResponse>("test", CancellationToken.None);
 
             result.Name.Should().Be("Test");
         }
@@ -87,7 +87,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             var service = CreateService(response);
 
-            Func<Task> act = async () => await service.GetAsync<TestGetResponse>("test");
+            Func<Task> act = async () => await service.GetAsync<TestGetResponse>("test", CancellationToken.None);
 
             await act.Should().ThrowAsync<BimehcomApiException>()
                 .Where(e => e.StatusCode == 400);
@@ -103,7 +103,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             var service = CreateService(response);
 
-            Func<Task> act = async () => await service.GetAsync<TestGetResponse>("test");
+            Func<Task> act = async () => await service.GetAsync<TestGetResponse>("test", CancellationToken.None);
 
             await act.Should().ThrowAsync<BimehcomHttpException>();
         }
@@ -122,7 +122,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
             var service = CreateService(response);
 
             var body = new { Name = "X" };
-            var result = await service.PostAsync<object, TestPostResponse>("test", body);
+            var result = await service.PostAsync<object, TestPostResponse>("test", body, CancellationToken.None);
 
             result.Success.Should().BeTrue();
         }
@@ -141,7 +141,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
             var service = CreateService(response);
 
             var body = new { Name = "Y" };
-            var result = await service.PutAsync<object, TestPutResponse>("test", body);
+            var result = await service.PutAsync<object, TestPutResponse>("test", body, CancellationToken.None);
 
             result.Updated.Should().BeTrue();
         }
@@ -156,7 +156,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             var service = CreateService(response);
 
-            var result = await service.DeleteAsync("test");
+            var result = await service.DeleteAsync("test", CancellationToken.None);
 
             result.Should().BeTrue();
         }
@@ -171,7 +171,7 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             var service = CreateService(response);
 
-            Func<Task> act = async () => await service.DeleteAsync("test");
+            Func<Task> act = async () => await service.DeleteAsync("test", CancellationToken.None);
 
             await act.Should().ThrowAsync<BimehcomApiException>()
                 .Where(e => e.StatusCode == 400);

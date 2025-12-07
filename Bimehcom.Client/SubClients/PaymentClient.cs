@@ -3,6 +3,7 @@ using Bimehcom.Client.SubClients.Abstraction;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.SubClients.Base.Payment.Requests;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bimehcom.Client.SubClients
@@ -17,14 +18,22 @@ namespace Bimehcom.Client.SubClients
             _httpService = httpService;
         }
 
-        public async Task<bool> SubmitEndorsementPaymentInformationAsync(SubmitEndorsementPaymentInformationRequest request)
+        public async Task<bool> SubmitEndorsementPaymentInformationAsync(SubmitEndorsementPaymentInformationRequest request, CancellationToken cancellationToken = default)
         {
-            return await _httpService.PostEncryptedPaymentInformation(ApiRoutes.SubmitEndorsementPaymentInformationAsync(request.endorsementId), (object)request);
+            return await _httpService.PostEncryptedPaymentInformation(
+                ApiRoutes.SubmitEndorsementPaymentInformationAsync(request.endorsementId),
+                (object)request,
+                null,
+                cancellationToken);
         }
 
-        public async Task<bool> SubmitInsuranceRequestPaymentInformationAsync(SubmitInsuranceRequestPaymentInformationRequest request)
+        public async Task<bool> SubmitInsuranceRequestPaymentInformationAsync(SubmitInsuranceRequestPaymentInformationRequest request, CancellationToken cancellationToken = default)
         {
-            return await _httpService.PostEncryptedPaymentInformation(ApiRoutes.SubmitInsuranceRequestPaymentInformationAsync((object)request.InsuranceRequestId), (object)request);
+            return await _httpService.PostEncryptedPaymentInformation(
+                ApiRoutes.SubmitInsuranceRequestPaymentInformationAsync((object)request.InsuranceRequestId),
+                (object)request,
+                null,
+                cancellationToken);
         }
     }
 }

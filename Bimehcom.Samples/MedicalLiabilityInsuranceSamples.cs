@@ -87,7 +87,7 @@ internal class MedicalLiabilityInsuranceSamples
         MedicalLiabilityInsuranceLogisticsRequirementsResponse logisticsRequirements = await Client.MedicalLiability.LogisticsRequirementsAsync(insuranceRequestId);
 
         // Delivery Addresses
-        MedicalLiabilityInsuranceDevlieryAddressesResponse deliveryAddresses = await Client.MedicalLiability.DeliveryAddressesAsync(insuranceRequestId);
+        MedicalLiabilityInsuranceDeliveryAddressesResponse deliveryAddresses = await Client.MedicalLiability.DeliveryAddressesAsync(insuranceRequestId);
 
         var deliveryDateTimeRequest = new MedicalLiabilityInsuranceDeliveryDateTimeRequest
         {
