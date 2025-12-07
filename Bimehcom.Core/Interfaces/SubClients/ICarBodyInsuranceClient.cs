@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bimehcom.Core.Interfaces.SubClients
 {
-    public interface ICarBodyInsuranceClient : IVehicleInsuranceClient , IEndorsementClient
+    public interface ICarBodyInsuranceClient : IVehicleInsuranceClient
     {
         Task<CarBodyInsuranceBasicDataResponse> GetBasicDataAsync();
         Task<CarBodyInsuranceInquiryResponse> InquiryAsync(CarBodyInsuranceInquiryRequest request);

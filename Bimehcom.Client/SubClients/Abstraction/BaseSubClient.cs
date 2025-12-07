@@ -111,38 +111,5 @@ where TResponse : IBimehcomApiResponse
         {
             return await _httpService.PostAsync<TRequest, TResponse>(ApiRoutes.RedirectToGateway((object)insuranceRequestId), request);
         }
-
-
-
-        public async Task<TResponse> GetEndorsementBasicDataAsync<TResponse>()
-            where TResponse : IBimehcomApiResponse
-        {
-            return await _httpService.GetAsync<TResponse>(ApiRoutes.GetEndorsementBasicData());
-        }
-        public async Task CreateEndorsementAsync<TRequest>(TRequest request)
-            where TRequest : IBimehcomApiRequest
-        {
-            await _httpService.PostAsync<TRequest, object>(ApiRoutes.CreateEndorsement(), request);
-        }
-
-        public async Task<TResponse> GetEndorsementInformationAsync<TResponse>(string endorsementId)
-            where TResponse : IBimehcomApiResponse
-        {
-            return await _httpService.GetAsync<TResponse>(ApiRoutes.GetEndorsementInformation(endorsementId));
-        }
-
-        public async Task<TResponse> UploadEndorsementRequiredFileAsync<TResponse>(string endorsementId, Stream fileStream, string fileName, string formFieldName)
-            where TResponse : IBimehcomApiResponse
-        {
-            return await _httpService.PostFileAsync<TResponse>(ApiRoutes.UploadEndorsementFile(endorsementId), fileStream, fileName, formFieldName);
-        }
-        public async Task<TResponse> GetEndorsementPrintFileAsync<TResponse>(string endorsementId)
-        {
-            return await _httpService.GetAsync<TResponse>(ApiRoutes.GetEndorsementPrintFile(endorsementId));
-        }
-        public async Task<TResponse> EndorsementValidationAsync<TResponse>(string endorsementId)
-        {
-            return await _httpService.GetAsync<TResponse>(ApiRoutes.EndorsementValidation(endorsementId));
-        }
     }
 }

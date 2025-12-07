@@ -1,4 +1,5 @@
 ﻿using Bimehcom.Core.Interfaces.SubClients;
+using Bimehcom.Core.Interfaces.SubClients.Base;
 
 namespace Bimehcom.Core.Interfaces
 {
@@ -6,6 +7,9 @@ namespace Bimehcom.Core.Interfaces
     {
         IAuthClient Auth { get; }
         IUserClient User { get; }
+        IPaymentClient Payment { get; }
+        IEndorsementClient Endorsement { get; }
+
         ICarThirdPartyInsuranceClient CarThirdParty { get; }
         ICarBodyInsuranceClient CarBody { get; }
         IMotorcycleThirdPartyInsuranceClient MotorcycleThirdParty { get; }
@@ -17,5 +21,6 @@ namespace Bimehcom.Core.Interfaces
         ISportsInsuranceClient Sports { get; }
         IPilgrimageInsuranceClient Pilgrimage { get; }
         ITravelPlusInsuranceClient TravelPlus { get; }
+
     }
 }
