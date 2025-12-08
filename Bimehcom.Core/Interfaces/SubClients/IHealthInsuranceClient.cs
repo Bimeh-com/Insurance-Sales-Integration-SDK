@@ -25,5 +25,6 @@ namespace Bimehcom.Core.Interfaces.SubClients
         Task<HealthInsuranceSetExtraInsuredInfoResponse> SetExtraInsuredInfoAsync(dynamic insuranceRequestId, HealthInsuranceSetExtraInsuredInfoRequest request, CancellationToken cancellationToken = default);
         Task<HealthInsuranceExtraInsuredRequiredFileResponse> UploadExtraInsuredRequiredFileAsync(dynamic insuranceRequestId, Guid extraInsuredId, Stream fileStream, string fileName, string formFieldName, CancellationToken cancellationToken = default);
         Task<HealthInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName, CancellationToken cancellationToken = default);
+        Task<HealthInsuranceGetInstallmentsResponse> GetInstallmentsAsync(HealthInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default);
     }
 }

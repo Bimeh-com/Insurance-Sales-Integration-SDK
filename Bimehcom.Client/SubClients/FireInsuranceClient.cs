@@ -3,6 +3,7 @@ using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,9 +25,11 @@ namespace Bimehcom.Client.SubClients
         public async Task<FireInsuranceInquiryResponse> InquiryAsync(FireInsuranceInquiryRequest request, CancellationToken cancellationToken = default) =>
             await base.InquiryAsync<FireInsuranceInquiryRequest, FireInsuranceInquiryResponse>(request, cancellationToken);
 
+        public async Task<FireInsuranceGetInstallmentsResponse> GetInstallmentsAsync(FireInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default) =>
+            await base.GetInstallmentsAsync<FireInsuranceGetInstallmentsRequest, FireInsuranceGetInstallmentsResponse>(request, cancellationToken);
+
         public async Task<FireInsuranceCreateResponse> CreateAsync(FireInsuranceCreateRequest request, CancellationToken cancellationToken = default) =>
             await base.CreateAsync<FireInsuranceCreateRequest, FireInsuranceCreateResponse>(request, cancellationToken);
-
         public async Task<FireInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
             await base.GetInfoAsync<FireInsuranceInfoResponse>((object)insuranceRequestId, cancellationToken);
 
@@ -35,6 +38,9 @@ namespace Bimehcom.Client.SubClients
 
         public async Task<FireInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
             await base.RequiredFileAsync<FireInsuranceRequiredFileResponse>((object)insuranceRequestId, cancellationToken);
+
+        public async Task<FireInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName, CancellationToken cancellationToken = default) =>
+            await base.UploadRequiredFileAsync<FireInsuranceUploadRequiredFileResponse>((object)insuranceRequestId, fileStream, fileName, formFieldName, cancellationToken);
 
         public async Task<FireInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
             await base.LogisticsRequirementsAsync<FireInsuranceLogisticsRequirementsResponse>((object)insuranceRequestId, cancellationToken);

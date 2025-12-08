@@ -10,6 +10,7 @@ namespace Bimehcom.Core.Interfaces.SubClients
     {
         Task<PilgrimageInsuranceBasicDataResponse> GetBasicDataAsync(CancellationToken cancellationToken = default);
         Task<PilgrimageInsuranceInquiryResponse> InquiryAsync(PilgrimageInsuranceInquiryRequest request, CancellationToken cancellationToken = default);
+        Task<PilgrimageInsuranceGetInstallmentsResponse> GetInstallmentsAsync(PilgrimageInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default);
         Task<PilgrimageInsuranceCreateResponse> CreateAsync(PilgrimageInsuranceCreateRequest request, CancellationToken cancellationToken = default);
         Task<PilgrimageInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
         Task<PilgrimageInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestId, PilgrimageInsuranceSetInfoRequest request, CancellationToken cancellationToken = default);
