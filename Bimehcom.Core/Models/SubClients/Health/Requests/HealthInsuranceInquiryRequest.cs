@@ -3,7 +3,7 @@ using Bimehcom.Core.Models.Base.Inquiry;
 using System;
 using System.Collections.Generic;
 
-namespace Bimehcom.Core.Interfaces.SubClients
+namespace Bimehcom.Core.Models.SubClients.Health.Requests
 {
     public class HealthInsuranceInquiryRequest : InquiryRequest, IBimehcomApiRequest
     {

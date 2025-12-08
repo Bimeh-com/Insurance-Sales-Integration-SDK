@@ -1,7 +1,7 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
 using Bimehcom.Core.Models.Base.DeliveryDateTime;
 
-namespace Bimehcom.Core.Interfaces.SubClients
+namespace Bimehcom.Core.Models.SubClients.Health.Requests
 {
     public class HealthInsuranceDeliveryDateTimeRequest : DeliveryDateTimeRequest, IBimehcomApiRequest
     {

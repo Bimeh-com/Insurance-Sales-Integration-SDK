@@ -21,6 +21,8 @@ namespace Bimehcom.Client.SubClients
 
         public async Task<PilgrimageInsuranceInquiryResponse> InquiryAsync(PilgrimageInsuranceInquiryRequest request, CancellationToken cancellationToken = default) =>
             await base.InquiryAsync<PilgrimageInsuranceInquiryRequest, PilgrimageInsuranceInquiryResponse>(request, cancellationToken);
+        public async Task<PilgrimageInsuranceGetInstallmentsResponse> GetInstallmentsAsync(PilgrimageInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default) =>
+            await base.GetInstallmentsAsync<PilgrimageInsuranceGetInstallmentsRequest, PilgrimageInsuranceGetInstallmentsResponse>(request, cancellationToken);
 
         public async Task<PilgrimageInsuranceCreateResponse> CreateAsync(PilgrimageInsuranceCreateRequest request, CancellationToken cancellationToken = default) =>
             await base.CreateAsync<PilgrimageInsuranceCreateRequest, PilgrimageInsuranceCreateResponse>(request, cancellationToken);

@@ -21,7 +21,8 @@ namespace Bimehcom.Client.SubClients
 
         public async Task<PersonalAccidentInsuranceInquiryResponse> InquiryAsync(PersonalAccidentInsuranceInquiryRequest request, CancellationToken cancellationToken = default) =>
             await base.InquiryAsync<PersonalAccidentInsuranceInquiryRequest, PersonalAccidentInsuranceInquiryResponse>(request, cancellationToken);
-
+        public async Task<PersonalAccidentInsuranceGetInstallmentsResponse> GetInstallmentsAsync(PersonalAccidentInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default) =>
+            await base.GetInstallmentsAsync<PersonalAccidentInsuranceGetInstallmentsRequest, PersonalAccidentInsuranceGetInstallmentsResponse>(request, cancellationToken);
         public async Task<PersonalAccidentInsuranceCreateResponse> CreateAsync(PersonalAccidentInsuranceCreateRequest request, CancellationToken cancellationToken = default) =>
             await base.CreateAsync<PersonalAccidentInsuranceCreateRequest, PersonalAccidentInsuranceCreateResponse>(request, cancellationToken);
 

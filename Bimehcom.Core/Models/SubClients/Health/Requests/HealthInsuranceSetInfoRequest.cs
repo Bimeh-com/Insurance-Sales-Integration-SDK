@@ -2,7 +2,7 @@
 using Bimehcom.Core.Models.Base.Info.Set;
 using System;
 
-namespace Bimehcom.Core.Interfaces.SubClients
+namespace Bimehcom.Core.Models.SubClients.Health.Requests
 {
     public class HealthInsuranceSetInfoRequest : InsuranceRequestBasicInformation, IBimehcomApiRequest
     {

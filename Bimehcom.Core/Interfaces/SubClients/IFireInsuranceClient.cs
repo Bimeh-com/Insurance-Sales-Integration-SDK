@@ -1,5 +1,6 @@
 ﻿using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,10 +10,12 @@ namespace Bimehcom.Core.Interfaces.SubClients
     {
         Task<FireInsuranceBasicDataResponse> GetBasicDataAsync(CancellationToken cancellationToken = default);
         Task<FireInsuranceInquiryResponse> InquiryAsync(FireInsuranceInquiryRequest request, CancellationToken cancellationToken = default);
+        Task<FireInsuranceGetInstallmentsResponse> GetInstallmentsAsync(FireInsuranceGetInstallmentsRequest request, CancellationToken cancellationToken = default);
         Task<FireInsuranceCreateResponse> CreateAsync(FireInsuranceCreateRequest request, CancellationToken cancellationToken = default);
         Task<FireInsuranceInfoResponse> GetInfoAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
         Task<FireInsuranceSetInfoResponse> SetInfoAsync(dynamic insuranceRequestId, FireInsuranceSetInfoRequest request, CancellationToken cancellationToken = default);
         Task<FireInsuranceRequiredFileResponse> RequiredFileAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
+        Task<FireInsuranceUploadRequiredFileResponse> UploadRequiredFileAsync(dynamic insuranceRequestId, Stream fileStream, string fileName, string formFieldName, CancellationToken cancellationToken = default);
         Task<FireInsuranceLogisticsRequirementsResponse> LogisticsRequirementsAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
         Task<FireInsuranceDeliveryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default);
         Task<FireInsuranceDeliveryDateTimeResponse> DeliveryDateTimeAsync(dynamic insuranceRequestId, FireInsuranceDeliveryDateTimeRequest request, CancellationToken cancellationToken = default);

@@ -1,7 +1,7 @@
 ﻿using Bimehcom.Core.Models.Abstraction;
 using Bimehcom.Core.Models.Base.Create;
 
-namespace Bimehcom.Core.Interfaces.SubClients
+namespace Bimehcom.Core.Models.SubClients.Health.Requests
 {
     public class HealthInsuranceCreateRequest : CreateRequest, IBimehcomApiRequest
     {
