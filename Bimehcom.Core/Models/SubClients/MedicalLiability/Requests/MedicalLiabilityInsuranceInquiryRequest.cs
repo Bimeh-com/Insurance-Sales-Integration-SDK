@@ -9,13 +9,13 @@ namespace Bimehcom.Core.Models.SubClients.MedicalLiability.Requests
         /// شناسه گروه بندی
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int MedicalTypeId { get; set; }
+        public long? MedicalTypeId { get; set; }
 
         /// <summary>
         /// شناسه تخصص انتخاب شده
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int? MedicalExpertiseId { get; set; }
+        public long? MedicalExpertiseId { get; set; }
 
         /// <summary>
         /// آیا رزیدنت است؟
@@ -31,7 +31,7 @@ namespace Bimehcom.Core.Models.SubClients.MedicalLiability.Requests
         /// شناسه سابقه عدم خسارت
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int? NoDamageDiscountId { get; set; }
+        public long? NoDamageDiscountId { get; set; }
         /// <summary>
         /// پوشش افزایشی ریالی دیه
         /// </summary>

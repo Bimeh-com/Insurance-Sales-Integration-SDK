@@ -27,7 +27,7 @@ namespace Bimehcom.Core.Models.SubClients.CarThirdParty.Requests
         /// </summary>
 
 
-        public int? ModelId { get; set; }
+        public long? ModelId { get; set; }
 
         /// <summary>
         /// شناسه سال ساخت (میلادی)

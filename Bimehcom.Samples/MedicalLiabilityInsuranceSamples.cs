@@ -1,8 +1,10 @@
 ﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.MedicalLiability.Requests;
 using Bimehcom.Core.Models.SubClients.MedicalLiability.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
-internal class MedicalLiabilityInsuranceSamples
+public class MedicalLiabilityInsuranceSamples
 {
     private IBimehcomClient Client;
 
@@ -11,8 +13,9 @@ internal class MedicalLiabilityInsuranceSamples
         Client = client;
     }
 
-    public async Task RunAsync()
+    public async Task<bool> RunAsync()
     {
+        var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
 
         // Basic Data
         MedicalLiabilityInsuranceBasicDataResponse basicData = await Client.MedicalLiability.GetBasicDataAsync();
@@ -24,9 +27,9 @@ internal class MedicalLiabilityInsuranceSamples
             HasMedicalSystemCode = true,
             IsResident = true,
             IsStudent = true,
-            MedicalExpertiseId = 214,
-            MedicalTypeId = 0,
-            NoDamageDiscountId = 10
+            MedicalExpertiseId = basicData.MedicalExpertises.FirstOrDefault()?.Id,
+            MedicalTypeId = basicData.MedicalTypes.FirstOrDefault()?.Id,
+            NoDamageDiscountId = basicData.NoDamageDiscounts.FirstOrDefault()?.Id,
         };
 
 
@@ -52,21 +55,21 @@ internal class MedicalLiabilityInsuranceSamples
         var setInfoRequest = new MedicalLiabilityInsuranceSetInfoRequest
         {
             AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-            BirthDate = DateTime.Parse("1998/3/20"),
-            FirstName = "تست",
-            LastName = "تست پور",
-            MobileNumber = "09309959493",
-            NationalCode = "0021191808",
-            Phone = "09309959493",
+            BirthDate = DateTime.Parse(sampleUser.BirthDate),
+            FirstName = sampleUser.FirstName,
+            LastName = sampleUser.LastName,
+            MobileNumber = sampleUser.Phone,
+            NationalCode = sampleUser.NationalCode,
+            Phone = sampleUser.Phone,
             TypeId = 0,
             
             GradeId = 2,
             HasOffice = true,
             InjectionLicensed = true,
-            MedicalCenterAddress = "tehran",
-            MedicalCenterPhone = "09309959493",
+            MedicalCenterAddress = "Tehran",
+            MedicalCenterPhone = "09120000000",
             MinorSurgeriesLicensed = true,
-            UniversityName = "tehran",
+            UniversityName = "Tehran",
         };
 
         MedicalLiabilityInsuranceSetInfoResponse setInfoResponse = await Client.MedicalLiability.SetInfoAsync(insuranceRequestId, setInfoRequest);
@@ -99,11 +102,11 @@ internal class MedicalLiabilityInsuranceSamples
 
         var setLogisticsRequirementsRequest = new MedicalLiabilityInsuranceSetLogisticsRequirementsRequest
         {
-            UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
+            UniqueId = deliveryDateTimeResponse.Deliveries.Where(x => x.Disabled == false && x.Times.Any(x => !x.Disabled)).FirstOrDefault()?.Times.Where(t => t.Disabled == false).FirstOrDefault()?.UniqueId,
             Description = "جهت تست نرم افزار",
-            Email = "",
-            ReceiverFullName = "تست تست پور",
-            ReceiverMobileNumber = "09309959493"
+            Email = sampleUser.Email,
+            ReceiverFullName = string.Join(" ", [sampleUser.FirstName, sampleUser.LastName]),
+            ReceiverMobileNumber = sampleUser.Phone
         };
 
         // Set Logistics Requirements
@@ -112,6 +115,6 @@ internal class MedicalLiabilityInsuranceSamples
 
         // Validate
         var validationResult = await Client.MedicalLiability.ValidationAsync(insuranceRequestId);
-
+        return validationResult;
     }
 }

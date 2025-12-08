@@ -11,7 +11,7 @@ namespace Bimehcom.Core.Models.SubClients.CarBody.Requests
         /// عدم خسارت بیمه ثالث
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int? ThirdPartyDiscountId { get; set; }
+        public long? ThirdPartyDiscountId { get; set; }
         /// <summary>
         /// تاریخ ساخت خودرو
         /// </summary>
@@ -23,7 +23,7 @@ namespace Bimehcom.Core.Models.SubClients.CarBody.Requests
         /// <summary>
         /// شرکت بیمه ثالث
         /// </summary>
-        public int? ThirdPartyCompanyId { get; set; }
+        public long? ThirdPartyCompanyId { get; set; }
 
         /// <summary>
         /// لیست تخفیف ها
@@ -40,7 +40,7 @@ namespace Bimehcom.Core.Models.SubClients.CarBody.Requests
         /// <summary>
         /// نوع استفاده خودرو
         /// </summary>
-        public int UsingTypeId { get; set; } = 1;
+        public long? UsingTypeId { get; set; }
 
 
 
@@ -63,7 +63,7 @@ namespace Bimehcom.Core.Models.SubClients.CarBody.Requests
         /// شناسه مدل خودرو
         /// دریافت شده از سرویس car-model
         /// </summary>
-        public int ModelId { get; set; }
+        public long? ModelId { get; set; }
 
         /// <summary>
         /// ارزش خودرو

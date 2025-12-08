@@ -10,7 +10,7 @@ namespace Bimehcom.Core.Models.SubClients.TravelPlus.Requests
         /// شناسه کشور مقصد
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int? CountryId { get; set; }
+        public long? CountryId { get; set; }
 
         /// <summary>
         /// تاریخ تولد
@@ -21,13 +21,13 @@ namespace Bimehcom.Core.Models.SubClients.TravelPlus.Requests
         /// مدت سفر
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int? DurationId { get; set; }
+        public long? DurationId { get; set; }
 
         /// <summary>
         /// نوع ویزا
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public EnInsVisaType? VisaTypeId { get; set; }
+        public long? VisaTypeId { get; set; }
 
         /// <summary>
         /// شناسه طرح

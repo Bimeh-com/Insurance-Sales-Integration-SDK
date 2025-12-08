@@ -5,5 +5,6 @@ namespace Bimehcom.Core.Models.SubClients.CarBody.Requests
 {
     public class CarBodyInsuranceDeliveryDateTimeRequest : DeliveryDateTimeRequest, IBimehcomApiRequest
     {
+        public string VisitUniqueId { get; set; }
     }
 }

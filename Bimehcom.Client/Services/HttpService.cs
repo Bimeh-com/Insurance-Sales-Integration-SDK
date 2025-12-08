@@ -28,6 +28,43 @@ namespace Bimehcom.Client.Services
             _httpClient = httpClient ?? HttpClientStore.GetOrCreate(apiBaseUrl);
         }
 
+        private TResponse DeserializeResponse<TResponse>(string json)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(json))
+                    return default!;
+
+                var trimmed = json.TrimStart();
+                var startsLikeJson = trimmed.Length > 0 && (trimmed[0] == '{' || trimmed[0] == '[');
+
+                if (!startsLikeJson)
+                {
+                    if (typeof(TResponse) == typeof(string))
+                    {
+                        return (TResponse)(object)json;
+                    }
+                    if (typeof(TResponse) == typeof(bool))
+                    {
+                        return (TResponse)(object)bool.Parse(json);
+                    }
+
+                    throw new BimehcomHttpException("Unexpected non-JSON response.", new Exception(json));
+                }
+
+                return JsonSerializer.Deserialize<TResponse>(json)!;
+            }
+            catch (JsonException)
+            {
+                if (typeof(TResponse) == typeof(string))
+                {
+                    return (TResponse)(object)json;
+                }
+
+                throw;
+            }
+        }
+
         public void AddGlobalHeader(string name, string value)
         {
             _globalHeaders.Add(name, value);
@@ -67,7 +104,7 @@ namespace Bimehcom.Client.Services
 
                 ValidateResponse(response, json);
 
-                return JsonSerializer.Deserialize<TResponse>(json);
+                return DeserializeResponse<TResponse>(json);
             }
             catch (Exception ex)
             {
@@ -93,7 +130,7 @@ namespace Bimehcom.Client.Services
 
                 ValidateResponse(response, json);
 
-                return JsonSerializer.Deserialize<TResponse>(json);
+                return DeserializeResponse<TResponse>(json);
             }
             catch (Exception ex)
             {
@@ -149,7 +186,7 @@ namespace Bimehcom.Client.Services
 
                 ValidateResponse(response, json);
 
-                return JsonSerializer.Deserialize<TResponse>(json)!;
+                return DeserializeResponse<TResponse>(json)!;
             }
             catch (Exception ex)
             {
@@ -175,7 +212,7 @@ namespace Bimehcom.Client.Services
 
                 ValidateResponse(response, json);
 
-                return JsonSerializer.Deserialize<TResponse>(json);
+                return DeserializeResponse<TResponse>(json);
             }
             catch (Exception ex)
             {

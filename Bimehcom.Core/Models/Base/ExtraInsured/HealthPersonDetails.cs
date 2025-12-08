@@ -5,7 +5,7 @@ namespace Bimehcom.Core.Models.Base.ExtraInsured
     public class HealthPersonDetails
     {
         public string NationalCode { get; set; }
-        public int? RelationshipId { get; set; }
+        public long? RelationshipId { get; set; }
         public Guid? Id { get; set; }
         /// <summary>
         /// اطلاعات مازاد

@@ -1,18 +1,24 @@
 ﻿using Bimehcom.Client;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
+using Bimehcom.Samples;
+var sampleDataPath = Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json");
+var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(sampleDataPath));
 
 IBimehcomClient client = new BimehcomClientBuilder((opt) =>
 {
-    opt.ApiKey = "da4aa2f8-70d9-4d56-b577-3162dfae2c0f";
-    opt.PublicKey = "<RSAKeyValue></RSAKeyValue>";
+    opt.BaseApiUrl = new Uri(sampleUser.BaseApiURL);
+    opt.ApiKey = sampleUser.ApiKey;
+    opt.PublicKey = sampleUser.PublicKey;
 }).Build();
 
 #region Authentication
 var localLoginRequest = new AuthLocalLoginRequest
 {
-    Username = "09309959493",
-    Password = "C26wZPZN7wLDkrz"
+    Username = sampleUser.Username,
+    Password = sampleUser.Password
 };
 var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 #endregion
@@ -25,7 +31,7 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 //await new FireInsuranceSamples(client).RunAsync();
 
 // Third Party Insurance
-//await new ThirdPartyInsuranceSamples(client).RunAsync();
+//await new CarThirdPartyInsuranceSamples(client).RunAsync();
 
 // Car Body Insurance
 //await new CarBodyInsuranceSamples(client).RunAsync();

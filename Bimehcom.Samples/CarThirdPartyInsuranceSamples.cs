@@ -3,9 +3,11 @@ using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
 using Bimehcom.Core.Models.SubClients.CarThirdParty.Requests;
 using Bimehcom.Core.Models.SubClients.CarThirdParty.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 namespace Bimehcom.Samples
 {
-    internal class CarThirdPartyInsuranceSamples
+    public class CarThirdPartyInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public CarThirdPartyInsuranceSamples(IBimehcomClient client)
@@ -14,8 +16,9 @@ namespace Bimehcom.Samples
         }
 
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
         
             // Basic Data
             CarThirdPartyInsuranceBasicDataResponse basicData = await Client.CarThirdParty.GetBasicDataAsync();
@@ -23,13 +26,13 @@ namespace Bimehcom.Samples
             // Plque Inquiry
             var plaqueInquiryRequest = new VehicleClientPlaqueInquiryRequest
             {
-                RightSide = 123,
-                LetterId = 4,
-                LeftSide = 56,
-                IranCode = 78,
-                NationalCode = "1234567890",
+                RightSide = sampleUser.PlaqueRightSide,
+                LetterId = sampleUser.PlaqueLetterId,
+                LeftSide = sampleUser.PlaqueLeftSide,
+                IranCode = sampleUser.PlaqueIranCode,
+                NationalCode = sampleUser.PlaqueNationalCode,
             };
-            VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.CarThirdParty.PlaqueInquiry(plaqueInquiryRequest);
+            //VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.CarThirdParty.PlaqueInquiry(plaqueInquiryRequest);
 
 
             // Car Models
@@ -39,10 +42,10 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new CarThirdPartyInsuranceInquiryRequest
             {
-                ModelId = 1001,
+                ModelId = carModels.Models.FirstOrDefault()?.Id,
                 PreviousInsuranceStatusId = 0,
                 ProductionYearId = 2025,
-                ReleaseDate = DateTime.Parse("2025/11/30"),
+                ReleaseDate = DateTime.Parse("2025/1/1"),
                 UsingTypeId = 1,
             };
 
@@ -81,13 +84,13 @@ namespace Bimehcom.Samples
             var setInfoRequest = new CarThirdPartyInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-                BirthDate = DateTime.Parse("1998/3/20"),
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
                 PolicyOwnerIsCarOwner = true,
-                Phone = "09309959493",
+                Phone = sampleUser.Phone,
                 TypeId = 0,
 
             };
@@ -124,11 +127,11 @@ namespace Bimehcom.Samples
 
             var setLogisticsRequirementsRequest = new CarThirdPartyInsuranceSetLogisticsRequirementsRequest
             {
-                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
+                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled && x.Times.Any(x => !x.Disabled))?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
                 Description = "جهت تست نرم افزار",
-                Email = "",
-                ReceiverFullName = "تست تست پور",
-                ReceiverMobileNumber = "09309959493"
+                Email = sampleUser.Email,
+                ReceiverFullName = string.Join(" ", new[] { sampleUser.FirstName, sampleUser.LastName }),
+                ReceiverMobileNumber = sampleUser.Phone
             };
 
             // Set Logistics Requirements
@@ -137,7 +140,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.CarThirdParty.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
         }
     }
 }

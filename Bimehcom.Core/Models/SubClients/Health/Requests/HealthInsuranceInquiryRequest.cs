@@ -16,7 +16,7 @@ namespace Bimehcom.Core.Models.SubClients.Health.Requests
         /// شناسه بیمه گر بیمه گذار اصلی
         /// دریافت شده از سرویس basic-data
         /// </summary>
-        public int? BasicInsuranceId { get; set; }
+        public long? BasicInsuranceId { get; set; }
 
         /// <summary>
         /// لیست اعضای خانواده
@@ -39,7 +39,7 @@ namespace Bimehcom.Core.Models.SubClients.Health.Requests
         /// <summary>
         /// شناسه بیمه گر بیمه گذار
         /// </summary>
-        public int? BasicInsuranceId { get; set; }
+        public long? BasicInsuranceId { get; set; }
 
         public List<HealthInqueryItem> FamilyMembers { get; set; }
         /// <summary>

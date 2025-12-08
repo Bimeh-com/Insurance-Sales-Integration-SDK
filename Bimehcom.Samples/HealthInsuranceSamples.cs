@@ -1,11 +1,12 @@
 ﻿using Bimehcom.Core.Interfaces;
-using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.Base.ExtraInsured;
 using Bimehcom.Core.Models.SubClients.Health.Requests;
 using Bimehcom.Core.Models.SubClients.Health.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 namespace Bimehcom.Samples
 {
-    internal class HealthInsuranceSamples
+    public class HealthInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public HealthInsuranceSamples(IBimehcomClient client)
@@ -13,8 +14,9 @@ namespace Bimehcom.Samples
             Client = client;
         }
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
             //Basic Data
 
             HealthInsuranceBasicDataResponse basicDataResponse = await Client.Health.GetBasicDataAsync();
@@ -23,13 +25,13 @@ namespace Bimehcom.Samples
             // Inquiry
             var inquiryRequest = new HealthInsuranceInquiryRequest
             {
-                BasicInsuranceId = 1,
-                BirthDate = DateTime.Parse("1995/3/21"),
+                BasicInsuranceId = basicDataResponse.BasicInsurers.FirstOrDefault()?.Id,
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
                 FamilyMembers = new List<HealthInqueryItem>
                 {
                     new HealthInqueryItem {
-                    BirthDate = DateTime.Parse("2016/3/20"),
-                    BasicInsuranceId = 1
+                    BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                    BasicInsuranceId = basicDataResponse.BasicInsurers.FirstOrDefault()?.Id
                 }
                 }
             };
@@ -53,15 +55,14 @@ namespace Bimehcom.Samples
             var userAddresses = await Client.User.GetAddressesAsync();
             var setInfoRequest = new HealthInsuranceSetInfoRequest
             {
-                AddressId = 1725179,
-                DelayUploadImageIds = [],
-                FatherName = "تسته پدر",
-                FirstName = "تست",
-                LastName = "تست پور",
+                AddressId = userAddresses.Addresses.FirstOrDefault().Id,
+                FatherName = sampleUser.FirstName,
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
                 GenderId = 0,
-                IdNumber = "0021191808",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
+                IdNumber = sampleUser.NationalCode,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
                 TypeId = 0,
             };
 
@@ -90,8 +91,8 @@ namespace Bimehcom.Samples
             {
                 extraInsureds.Add(new HealthPersonDetails
                 {
-                    NationalCode = "0021191808",
-                    RelationshipId = 5,
+                    NationalCode = sampleUser.NationalCode,
+                    RelationshipId = basicDataResponse.Relationships.FirstOrDefault()?.Id,
                     Id = extraInsured.Id
                 });
             }
@@ -130,11 +131,11 @@ namespace Bimehcom.Samples
 
             var setLogisticsRequirementsRequest = new HealthInsuranceSetLogisticsRequirementsRequest
             {
-                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
+                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled && x.Times.Any(x => !x.Disabled))?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
                 Description = "جهت تست نرم افزار",
-                Email = "",
-                ReceiverFullName = "تست تست پور",
-                ReceiverMobileNumber = "09309959493"
+                Email = sampleUser.Email,
+                ReceiverFullName = string.Join(" ", new[] { sampleUser.FirstName, sampleUser.LastName }),
+                ReceiverMobileNumber = sampleUser.Phone
             };
 
             // Set Logistics Requirements
@@ -143,6 +144,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.Health.ValidationAsync(insuranceRequestId);
+            return validationResult;
         }
     }
 }

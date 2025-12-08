@@ -1,0 +1,22 @@
+﻿{
+  "BaseApiURL": "Https://coreapi.bimeh.com",
+  "ApiKey": "da4aa2f8-70d9-4d56-b577-3162dfae2c0f",
+  "PublicKey": "<RSAKeyValue></RSAKeyValue>",
+  "Username": "09120000000",
+  "Password": "ABCDEFGHIJKL",
+  "FirstName": "تست",
+  "LastName": "تست پور",
+  "Phone": "09120000000",
+  "NationalCode": "01234567890",
+  "Email": "test@example.com",
+  "IBAN": "IR000000000000000000000000",
+  "BirthDate": "2000-01-01",
+  "PostalCode": "1234567890",
+  "LatinFirstName": "Test",
+  "LatinLastName": "Testpour",
+  "PlaqueRightSide": 123,
+  "PlaqueLetterId": 4,
+  "PlaqueLeftSide": 56,
+  "PlaqueIranCode": 78,
+  "PlaqueNationalCode": "1234567890"
+}

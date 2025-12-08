@@ -2,10 +2,12 @@
 using Bimehcom.Core.Models.Base.Info.Set;
 using Bimehcom.Core.Models.SubClients.Pilgrimage.Requests;
 using Bimehcom.Core.Models.SubClients.Pilgrimage.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
 namespace Bimehcom.Samples
 {
-    internal class PilgrimageInsuranceSamples
+    public class PilgrimageInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public PilgrimageInsuranceSamples(IBimehcomClient client)
@@ -13,8 +15,9 @@ namespace Bimehcom.Samples
             Client = client;
         }
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
             // Basic Data
             PilgrimageInsuranceBasicDataResponse basicData = await Client.Pilgrimage.GetBasicDataAsync();
 
@@ -22,8 +25,8 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new PilgrimageInsuranceInquiryRequest
             {
-                BirthDate = DateTime.Parse("1998/3/20"),
-                TravelStartDate = DateTime.Parse("2025/12/30"),
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                TravelStartDate = DateTime.Parse("2026/1/1"),
             };
 
 
@@ -49,12 +52,12 @@ namespace Bimehcom.Samples
             var setInfoRequest = new PilgrimageInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-                BirthDate = DateTime.Parse("1998/3/20"),
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
-                Phone = "09309959493",
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
+                Phone = sampleUser.Phone,
                 Gender = Gender.Male,
                 TypeId = 0,
             };
@@ -87,7 +90,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.Pilgrimage.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
         }
     }
 }
