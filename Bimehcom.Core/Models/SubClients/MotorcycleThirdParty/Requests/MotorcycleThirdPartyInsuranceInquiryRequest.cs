@@ -15,7 +15,7 @@ namespace Bimehcom.Core.Models.SubClients.MotorcycleThirdParty.Requests
         /// <summary>
         /// شناسه نوع موتور
         /// </summary>
-        public int? MotorTypeId { get; set; }
+        public long? MotorTypeId { get; set; }
 
         /// <summary>
         /// شرکت بیمه گر قبلی

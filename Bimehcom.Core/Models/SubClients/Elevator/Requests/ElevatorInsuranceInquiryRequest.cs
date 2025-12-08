@@ -8,17 +8,17 @@ namespace Bimehcom.Core.Models.SubClients.Elevator.Requests
         /// <summary>
         /// شناسه کاربری آسانسور
         /// </summary>
-        public int? ElevatorUsageId { get; set; }
+        public long? ElevatorUsageId { get; set; }
 
         /// <summary>
         /// تعداد طبقات توقف آسانسور
         /// </summary>
-        public int? FloorsCount { get; set; }
+        public long? FloorsCount { get; set; }
 
         /// <summary>
         /// ظرفیت آسانسور(نفر)
         /// </summary>
-        public int? ElevatorCapacity { get; set; }
+        public long? ElevatorCapacity { get; set; }
 
         /// <summary>
         /// درب داخلی دارد
@@ -28,6 +28,6 @@ namespace Bimehcom.Core.Models.SubClients.Elevator.Requests
         /// <summary>
         /// عمر آسانسور
         /// </summary>
-        public int? ElevatorAge { get; set; }
+        public long? ElevatorAge { get; set; }
     }
 }

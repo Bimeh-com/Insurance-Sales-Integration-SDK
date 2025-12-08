@@ -1,4 +1,5 @@
-﻿using Bimehcom.Client.SubClients.Abstraction;
+﻿using Bimehcom.Client.Extensions;
+using Bimehcom.Client.SubClients.Abstraction;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
 using Bimehcom.Core.Models.SubClients.CarBody.Requests;
@@ -47,6 +48,18 @@ namespace Bimehcom.Client.SubClients
 
         public async Task<CarBodyInsuranceSetLogisticsRequirementsResponse> SetLogisticsRequirementsAsync(dynamic insuranceRequestId, CarBodyInsuranceSetLogisticsRequirementsRequest request, CancellationToken cancellationToken = default) =>
             await base.SetLogisticsRequirementsAsync<CarBodyInsuranceSetLogisticsRequirementsRequest, CarBodyInsuranceSetLogisticsRequirementsResponse>((object)insuranceRequestId, request, cancellationToken);
+
+        public async Task<CarBodyInsuranceVisitAddressesResponse> VisitAddressesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await _httpService.GetAsync<CarBodyInsuranceVisitAddressesResponse>(ApiRoutes.VisitAddresses((object)insuranceRequestId), cancellationToken);
+        public async Task<CarBodyInsuranceVisitDateTimeResponse> VisitDateTimeAsync(dynamic insuranceRequestId, CarBodyInsuranceVisitDateTimeRequest request, CancellationToken cancellationToken = default) =>
+            await _httpService.PostAsync<CarBodyInsuranceVisitDateTimeRequest, CarBodyInsuranceVisitDateTimeResponse>(ApiRoutes.VisitDateTime((object) insuranceRequestId), request, cancellationToken);
+
+        public async Task<CarBodyInsuranceVisitCenterProvinceResponse> VisitCenterProvincesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
+            await _httpService.GetAsync<CarBodyInsuranceVisitCenterProvinceResponse>(ApiRoutes.VisitCenterProvinces(), cancellationToken);
+        public async Task<CarBodyInsuranceVisitCenterProvinceCitiesResponse> VisitCenterProvinceCitiesAsync(long provinceId, CancellationToken cancellationToken = default) =>
+            await _httpService.GetAsync<CarBodyInsuranceVisitCenterProvinceCitiesResponse>(ApiRoutes.VisitCenterProvinceCities(provinceId), cancellationToken);
+        public async Task<CarBodyInsuranceVisitCenterDateTimeResponse> VisitCenterDateTimeAsync(dynamic insuranceRequestId, CarBodyInsuranceVisitCenterDateTimeRequest request, CancellationToken cancellationToken = default) =>
+            await _httpService.PostAsync<CarBodyInsuranceVisitCenterDateTimeRequest, CarBodyInsuranceVisitCenterDateTimeResponse>(ApiRoutes.VisitCenterDateTime((object)insuranceRequestId), request, cancellationToken);
 
         public async Task<CarBodyInsuranceDeliveryAddressesResponse> DeliveryAddressesAsync(dynamic insuranceRequestId, CancellationToken cancellationToken = default) =>
             await base.DeliveryAddressesAsync<CarBodyInsuranceDeliveryAddressesResponse>((object)insuranceRequestId, cancellationToken);

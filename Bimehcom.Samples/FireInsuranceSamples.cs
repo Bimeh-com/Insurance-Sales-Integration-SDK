@@ -1,10 +1,12 @@
 ﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Fire.Requests;
 using Bimehcom.Core.Models.SubClients.Fire.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
 namespace Bimehcom.Samples
 {
-    internal class FireInsuranceSamples
+    public class FireInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public FireInsuranceSamples(IBimehcomClient client)
@@ -13,8 +15,10 @@ namespace Bimehcom.Samples
         }
 
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
+
             //Basic Data
 
             FireInsuranceBasicDataResponse basicDataResponse = await Client.Fire.GetBasicDataAsync();
@@ -52,15 +56,16 @@ namespace Bimehcom.Samples
             var setInfoRequest = new FireInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-                BirthDate = DateTime.Parse("1998/3/20"),
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                GenderId = 0,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
                 ConstructingDate = 1404,
-                FirstName = "تست",
-                LastName = "تست پور",
                 FloorCount = 1,
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
                 OwnershipTypeId = 1,
-                TypeId = 0
+                TypeId = 0,
             };
 
             FireInsuranceSetInfoResponse setInfoResponse = await Client.Fire.SetInfoAsync(insuranceRequestId, setInfoRequest);
@@ -85,11 +90,11 @@ namespace Bimehcom.Samples
 
             var setLogisticsRequirementsRequest = new FireInsuranceSetLogisticsRequirementsRequest
             {
-                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
+                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled && x.Times.Any(x => !x.Disabled))?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
                 Description = "جهت تست نرم افزار",
-                Email = "",
-                ReceiverFullName = "تست تست پور",
-                ReceiverMobileNumber = "09309959493"
+                Email = sampleUser.Email,
+                ReceiverFullName = string.Join(" ", new[] { sampleUser.FirstName, sampleUser.LastName }),
+                ReceiverMobileNumber = sampleUser.Phone
             };
 
             // Set Logistics Requirements
@@ -98,7 +103,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.Fire.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
         }
     }
 }

@@ -3,9 +3,11 @@ using Bimehcom.Core.Models.SubClients.Base.Vehicle.Requests;
 using Bimehcom.Core.Models.SubClients.Base.Vehicle.Responses;
 using Bimehcom.Core.Models.SubClients.CarBody.Requests;
 using Bimehcom.Core.Models.SubClients.CarBody.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 namespace Bimehcom.Samples
 {
-    internal class CarBodyInsuranceSamples
+    public class CarBodyInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public CarBodyInsuranceSamples(IBimehcomClient client)
@@ -14,21 +16,22 @@ namespace Bimehcom.Samples
         }
 
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
             // Basic Data
             CarBodyInsuranceBasicDataResponse basicData = await Client.CarBody.GetBasicDataAsync();
 
             // Plque Inquiry
             var plaqueInquiryRequest = new VehicleClientPlaqueInquiryRequest
             {
-                LeftSide = 56,
-                LetterId = 4,
-                RightSide = 123,
-                IranCode = 78,
-                NationalCode = "1234567890",
+                LeftSide = sampleUser.PlaqueLeftSide,
+                LetterId = sampleUser.PlaqueLetterId,
+                RightSide = sampleUser.PlaqueRightSide,
+                IranCode = sampleUser.PlaqueIranCode,
+                NationalCode = sampleUser.PlaqueNationalCode,
             };
-            VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.CarBody.PlaqueInquiry(plaqueInquiryRequest);
+            //VehicleClientPlaqueInquiryResponse plaqueInquiryResponse = await Client.CarBody.PlaqueInquiry(plaqueInquiryRequest);
 
 
             // Car Models
@@ -40,12 +43,12 @@ namespace Bimehcom.Samples
             {
                 CarBodyNoDamageYearId = null,
                 Imported = false,
-                ModelId = 1001,
+                ModelId = carModels.Models.FirstOrDefault()?.Id,
                 Price = 12000000000,
-                ProductionDate = DateTime.Parse("2021/03/21"),
-                ThirdPartyCompanyId = 1026,
-                ThirdPartyDiscountId = 0,
-                UsingTypeId = 1,
+                ProductionDate = DateTime.Parse("2025/1/1"),
+                ThirdPartyCompanyId = basicData.Companies.FirstOrDefault()?.Id,
+                ThirdPartyDiscountId = basicData.ThirdPartyDiscounts.FirstOrDefault()?.Id,
+                UsingTypeId = basicData.UsingTypes.FirstOrDefault()?.Id,
             };
 
 
@@ -84,12 +87,12 @@ namespace Bimehcom.Samples
             var setInfoRequest = new CarBodyInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-                BirthDate = DateTime.Parse("1998/3/20"),
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
-                Phone = "09309959493",
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
+                Phone = sampleUser.Phone,
                 TypeId = 0,
             };
 
@@ -113,21 +116,64 @@ namespace Bimehcom.Samples
             // Delivery Addresses
             CarBodyInsuranceDeliveryAddressesResponse deliveryAddresses = await Client.CarBody.DeliveryAddressesAsync(insuranceRequestId);
 
-            var deliveryDateTimeRequest = new CarBodyInsuranceDeliveryDateTimeRequest
+            // First Visit Method
+            //// Visit Information
+            //CarBodyInsuranceVisitAddressesResponse visitAddresses = await Client.CarBody.VisitAddressesAsync(insuranceRequestId);
+
+            //var visitDateTimeRequest = new CarBodyInsuranceVisitDateTimeRequest
+            //{
+            //    AddressId = userAddresses.Addresses.FirstOrDefault().Id,
+            //};
+
+            //CarBodyInsuranceVisitDateTimeResponse visitDateTimeResponse = await Client.CarBody.VisitDateTimeAsync(insuranceRequestId, visitDateTimeRequest);
+
+
+
+            //// Delivery Date/Time 
+            //var deliveryDateTimeRequest = new CarBodyInsuranceDeliveryDateTimeRequest
+            //{
+            //    AddressId = userAddresses.Addresses.FirstOrDefault().Id,
+            //    VisitUniqueId = visitDateTimeResponse.Visits.Where(x => x.Disabled == false && x.Times.Any(x => !x.Disabled)).FirstOrDefault()?.Times.Where(t => t.Disabled == false).FirstOrDefault()?.UniqueId
+
+            //};
+
+            // Second Visit Method
+            // Visit Center Province
+            CarBodyInsuranceVisitCenterProvinceResponse visitCenterProvinces = await Client.CarBody.VisitCenterProvincesAsync(insuranceRequestId);
+
+            CarBodyInsuranceVisitCenterProvinceCitiesResponse visitCenterProvinceCities = await Client.CarBody.VisitCenterProvinceCitiesAsync(visitCenterProvinces.Provinces.FirstOrDefault().Id);
+            // Visit Center Date/Time
+            CarBodyInsuranceVisitCenterDateTimeRequest visitCenterDateTimeRequest = new CarBodyInsuranceVisitCenterDateTimeRequest
             {
-                AddressId = deliveryAddresses.SelectedId
+                CityId = visitCenterProvinceCities.Cities.FirstOrDefault().Id
             };
 
+            CarBodyInsuranceVisitCenterDateTimeResponse visitCenterDateTime = await Client.CarBody.VisitCenterDateTimeAsync(insuranceRequestId, visitCenterDateTimeRequest);
+
             // Delivery Date/Time 
+            var deliveryDateTimeRequest = new CarBodyInsuranceDeliveryDateTimeRequest
+            {
+                AddressId = userAddresses.Addresses.FirstOrDefault().Id,
+                VisitUniqueId = visitCenterDateTime.VisitCenters.FirstOrDefault().Dates.FirstOrDefault(x => !x.Disabled && x.Times.Any(x => !x.Disabled))?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId
+            };
+
+            // Third Visit Method
+            // Delivery Date/Time 
+            //var deliveryDateTimeRequest = new CarBodyInsuranceDeliveryDateTimeRequest
+            //{
+            //    AddressId = userAddresses.Addresses.FirstOrDefault().Id,
+            //    VisitUniqueId = logisticsRequirements.Visit.Methods.LastOrDefault()?.UniqueId
+            //};
+
             CarBodyInsuranceDeliveryDateTimeResponse deliveryDateTimeResponse = await Client.CarBody.DeliveryDateTimeAsync(insuranceRequestId, deliveryDateTimeRequest);
 
             var setLogisticsRequirementsRequest = new CarBodyInsuranceSetLogisticsRequirementsRequest
             {
-                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
+                UniqueId = logisticsRequirements.Visit.Methods.LastOrDefault()?.UniqueId,
                 Description = "جهت تست نرم افزار",
-                Email = "",
-                ReceiverFullName = "تست تست پور",
-                ReceiverMobileNumber = "09309959493"
+                Email = sampleUser.Email,
+                ReceiverFullName = string.Join(" ", [sampleUser.FirstName, sampleUser.LastName]),
+                ReceiverMobileNumber = sampleUser.Phone
             };
 
             // Set Logistics Requirements
@@ -136,7 +182,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.CarBody.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
         }
     }
 }

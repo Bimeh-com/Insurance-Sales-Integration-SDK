@@ -2,10 +2,12 @@
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Elevator.Requests;
 using Bimehcom.Core.Models.SubClients.Elevator.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
 namespace Bimehcom.Samples
 {
-    internal class ElevatorInsuranceSamples
+    public class ElevatorInsuranceSamples
     {
         private IBimehcomClient Client;
 
@@ -14,8 +16,9 @@ namespace Bimehcom.Samples
             Client = client;
         }
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
             // Basic Data
             ElevatorInsuranceBasicDataResponse basicData = await Client.Elevator.GetBasicDataAsync();
 
@@ -23,10 +26,10 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new ElevatorInsuranceInquiryRequest
             {
-                ElevatorAge = 5,
-                ElevatorCapacity = 3,
-                ElevatorUsageId = 0,
-                FloorsCount = 3,
+                ElevatorAge = basicData.ElevatorAge.FirstOrDefault()?.Id,
+                ElevatorCapacity = basicData.ElevatorCapacity.FirstOrDefault()?.Id,
+                ElevatorUsageId = basicData.ElevatorUsages.FirstOrDefault()?.Id,
+                FloorsCount = basicData.FloorsCount.FirstOrDefault()?.Id,
                 HasInteriorDoor = true
             };
 
@@ -53,12 +56,12 @@ namespace Bimehcom.Samples
             var setInfoRequest = new ElevatorInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-                BirthDate = DateTime.Parse("1998/3/20"),
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
-                Phone = "09309959493",
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
+                Phone = sampleUser.Phone,
                 TypeId = 0,
             };
 
@@ -92,11 +95,11 @@ namespace Bimehcom.Samples
 
             var setLogisticsRequirementsRequest = new ElevatorInsuranceSetLogisticsRequirementsRequest
             {
-                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled)?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
+                UniqueId = deliveryDateTimeResponse.Deliveries.FirstOrDefault(x => !x.Disabled && x.Times.Any(x => !x.Disabled))?.Times.FirstOrDefault(t => !t.Disabled)?.UniqueId,
                 Description = "جهت تست نرم افزار",
-                Email = "",
-                ReceiverFullName = "تست تست پور",
-                ReceiverMobileNumber = "09309959493"
+                Email = sampleUser.Email,
+                ReceiverFullName = string.Join(" ", new[] { sampleUser.FirstName, sampleUser.LastName }),
+                ReceiverMobileNumber = sampleUser.Phone
             };
 
             // Set Logistics Requirements
@@ -105,7 +108,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.Elevator.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
 
         }
 

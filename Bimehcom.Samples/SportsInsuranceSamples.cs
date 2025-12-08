@@ -1,10 +1,12 @@
 ﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Sports.Requests;
 using Bimehcom.Core.Models.SubClients.Sports.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
 namespace Bimehcom.Samples
 {
-    internal class SportsInsuranceSamples
+    public class SportsInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public SportsInsuranceSamples(IBimehcomClient client)
@@ -12,8 +14,9 @@ namespace Bimehcom.Samples
             Client = client;
         }
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
             // Basic Data
             SportsInsuranceBasicDataResponse basicData = await Client.Sports.GetBasicDataAsync();
 
@@ -21,8 +24,8 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new SportsInsuranceInquiryRequest
             {
-                BirthDate = DateTime.Parse("1998/3/20"),
-                CareerId = 8
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                CareerId = basicData.Careers.FirstOrDefault()?.Id
             };
 
 
@@ -48,12 +51,12 @@ namespace Bimehcom.Samples
             var setInfoRequest = new SportsInsuranceSetInfoRequest
             {
                 AddressId = userAddresses.Addresses.FirstOrDefault().Id,
-                BirthDate = DateTime.Parse("1998/3/20"),
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
-                Phone = "09309959493",
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
+                Phone = sampleUser.Phone,
                 TypeId = 0,
             };
 
@@ -85,7 +88,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.Sports.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
         }
 
     }

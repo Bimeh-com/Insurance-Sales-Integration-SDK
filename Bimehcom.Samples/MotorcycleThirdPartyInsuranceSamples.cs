@@ -1,6 +1,8 @@
 ﻿using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.MotorcycleThirdParty.Requests;
 using Bimehcom.Core.Models.SubClients.MotorcycleThirdParty.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
 namespace Bimehcom.Samples
 {
@@ -12,8 +14,10 @@ namespace Bimehcom.Samples
             Client = client;
         }
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
+
             // Basic Data
             MotorcycleThirdPartyInsuranceBasicDataResponse basicData = await Client.MotorcycleThirdParty.GetBasicDataAsync();
 
@@ -21,10 +25,10 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new MotorcycleThirdPartyInsuranceInquiryRequest
             {
-                MotorTypeId = 7,
+                MotorTypeId = basicData.MotorTypes.FirstOrDefault()?.Id,
                 PreviousInsuranceStatusId = 0,
                 ProductionYearId = 2025,
-                ReleaseDate = DateTime.Parse("2025/12/2"),
+                ReleaseDate = DateTime.Parse("2025/1/1"),
             };
 
 
@@ -45,14 +49,15 @@ namespace Bimehcom.Samples
 
 
             // Set Info
+            var userAddresses = await Client.User.GetAddressesAsync();
             var setInfoRequest = new MotorcycleThirdPartyInsuranceSetInfoRequest
             {
-                AddressId = 1725179,
-                BirthDate = DateTime.Parse("1996/3/20"),
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
+                AddressId = userAddresses.Addresses.FirstOrDefault().Id,
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
                 PolicyOwnerIsCarOwner = true,
                 TypeId = 0,
             };
@@ -85,7 +90,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.MotorcycleThirdParty.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
          
         }
     }

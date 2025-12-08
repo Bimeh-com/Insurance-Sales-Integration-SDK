@@ -2,7 +2,7 @@
 {
     public interface ITime
     {
-        int Id { get; set; }
+        long Id { get; set; }
         string UniqueId { get; set; }
         string Title { get; set; }
 

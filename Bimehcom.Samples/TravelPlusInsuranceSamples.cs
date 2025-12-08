@@ -1,11 +1,12 @@
 ﻿using Bimehcom.Core.Interfaces;
-using Bimehcom.Core.Models.Base.Inquiry;
 using Bimehcom.Core.Models.SubClients.TravelPlus.Requests;
 using Bimehcom.Core.Models.SubClients.TravelPlus.Responses;
+using Bimehcom.Samples.SampleData;
+using System.Text.Json;
 
 namespace Bimehcom.Samples
 {
-    internal class TravelPlusInsuranceSamples
+    public class TravelPlusInsuranceSamples
     {
         public IBimehcomClient Client { get; }
         public TravelPlusInsuranceSamples(IBimehcomClient client)
@@ -13,8 +14,9 @@ namespace Bimehcom.Samples
             Client = client;
         }
 
-        public async Task RunAsync()
+        public async Task<bool> RunAsync()
         {
+            var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json")));
             // Basic Data
             TravelPlusInsuranceBasicDataResponse basicData = await Client.TravelPlus.GetBasicDataAsync();
 
@@ -22,10 +24,10 @@ namespace Bimehcom.Samples
 
             var inquiryRequest = new TravelPlusInsuranceInquiryRequest
             {
-                BirthDate = DateTime.Parse("1998/3/20"),
-                CountryId = 2,
-                DurationId = 12,
-                VisaTypeId = EnInsVisaType.One,
+                BirthDate = DateTime.Parse(sampleUser.BirthDate),
+                CountryId = basicData.Countries.FirstOrDefault()?.Id,
+                DurationId = basicData.Durations.FirstOrDefault()?.Id,
+                VisaTypeId = basicData.VisaTypes.FirstOrDefault()?.Id,
             };
 
 
@@ -50,14 +52,14 @@ namespace Bimehcom.Samples
             var userAddresses = await Client.User.GetAddressesAsync();
             var setInfoRequest = new TravelPlusInsuranceSetInfoRequest
             {
-                FirstName = "تست",
-                LastName = "تست پور",
-                MobileNumber = "09309959493",
-                NationalCode = "0021191808",
+                FirstName = sampleUser.FirstName,
+                LastName = sampleUser.LastName,
+                MobileNumber = sampleUser.Phone,
+                NationalCode = sampleUser.NationalCode,
                 TypeId = 0,
                 GenderId = 0,
-                LatinFirstName = "Test",
-                LatinLastName = "Testpour",
+                LatinFirstName = sampleUser.LatinFirstName,
+                LatinLastName = sampleUser.LatinLastName,
                 PassportNumber = "A123456789",
             };
 
@@ -89,7 +91,7 @@ namespace Bimehcom.Samples
 
             // Validate
             var validationResult = await Client.TravelPlus.ValidationAsync(insuranceRequestId);
-
+            return validationResult;
         }
     }
 }

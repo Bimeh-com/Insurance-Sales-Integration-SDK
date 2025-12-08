@@ -8,8 +8,19 @@ namespace Bimehcom.Client.Extensions
         internal static string LocalLogin() => $"authentication/local-login";
 
         // User
-        internal static string GetUserAddresses() => $"user/address";
+        internal static string UserAddress() => $"user/address";
+        internal static string DeleteUserAddress(long addressId) => $"user/address/{addressId}";
+        internal static string GetUserAddressProvinces() => $"insurance/province";
+        internal static string GetUserAddressProvinceCities(long provinceId) => $"insurance/province/{provinceId}/city";
         internal static string GetUserPolicyOwners() => $"user/policy-owner";
+        internal static string AddUserPlaque() => $"user/plaque";
+        internal static string GetUserPlaques() => $"user/plaque";
+        internal static string GetContactUsInformation() => $"public/contact-us";
+        internal static string SubmitContactUs() => $"public/contact-us";
+        internal static string GetUserProfileInformations() => $"user/info";
+        internal static string UpdateUserProfileInformations() => $"user/info";
+        internal static string GetUserPurchases() => $"user/request";
+        internal static string GetUserInstallments() => $"user/Installment-purchases";
 
         // Vehicle Insurance
         internal static string CarModels(string subClientName, int brandId, int categoryId) => $"insurance/{subClientName}/car-model/{brandId}/{categoryId}";
@@ -24,6 +35,11 @@ namespace Bimehcom.Client.Extensions
         internal static string SetInfo(string subClientName, dynamic insuranceRequestId) => $"insurance/{subClientName}/{insuranceRequestId}/info";
         internal static string RequiredFile(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/required-file";
         internal static string LogisticsRequirements(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/logistics-requirement";
+        internal static string VisitAddresses(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/visit-address";
+        internal static string VisitDateTime(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/visit-date-time";
+        internal static string VisitCenterProvinces() => $"insurance/visitcenter/province";
+        internal static string VisitCenterProvinceCities(long provinceId) => $"insurance/visitcenter/province/{provinceId}/city";
+        internal static string VisitCenterDateTime(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/visitcenter-date-time";
         internal static string DeliveryAddresses(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/delivery-address";
         internal static string DeliveryDateTime(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/delivery-date-time";
         internal static string Validation(dynamic insuranceRequestId) => $"insurance/{insuranceRequestId}/validation";
