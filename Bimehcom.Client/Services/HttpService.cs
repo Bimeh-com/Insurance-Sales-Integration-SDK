@@ -70,22 +70,35 @@ namespace Bimehcom.Client.Services
             _globalHeaders.Add(name, value);
         }
 
-        private void ApplyGlobalHeaders(Dictionary<string, string>? customHeaders = null)
+        private HttpRequestMessage BuildRequest(HttpMethod method, string url, HttpContent? content = null, Dictionary<string, string>? customHeaders = null)
         {
-            _httpClient.DefaultRequestHeaders.Clear();
+            var request = new HttpRequestMessage(method, url);
+
+            if (content != null)
+            {
+                request.Content = content;
+            }
 
             foreach (var header in _globalHeaders)
             {
-                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                if (!request.Headers.TryAddWithoutValidation(header.Key, header.Value) && request.Content != null)
+                {
+                    request.Content.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
             }
 
             if (customHeaders != null)
             {
                 foreach (var kv in customHeaders)
                 {
-                    _httpClient.DefaultRequestHeaders.Add(kv.Key, kv.Value);
+                    if (!request.Headers.TryAddWithoutValidation(kv.Key, kv.Value) && request.Content != null)
+                    {
+                        request.Content.Headers.TryAddWithoutValidation(kv.Key, kv.Value);
+                    }
                 }
             }
+
+            return request;
         }
 
         public async Task<TResponse> GetAsync<TResponse>(string url, CancellationToken cancellationToken = default)
@@ -97,9 +110,8 @@ namespace Bimehcom.Client.Services
         {
             try
             {
-                ApplyGlobalHeaders(customHeaders);
-
-                var response = await _httpClient.GetAsync(url, cancellationToken);
+                var request = BuildRequest(HttpMethod.Get, url, null, customHeaders);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -122,10 +134,9 @@ namespace Bimehcom.Client.Services
         {
             try
             {
-                ApplyGlobalHeaders(customHeaders);
-
                 var jsonContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync(url, jsonContent, cancellationToken);
+                var request = BuildRequest(HttpMethod.Post, url, jsonContent, customHeaders);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -148,10 +159,9 @@ namespace Bimehcom.Client.Services
                     EncryptedData = RsaCryptographyService.Encrypt(JsonSerializer.Serialize((object)data), _options.PublicKey)
                 };
 
-                ApplyGlobalHeaders(customHeaders);
-
                 var jsonContent = new StringContent(JsonSerializer.Serialize(encryptedData), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync(url, jsonContent, cancellationToken);
+                var request = BuildRequest(HttpMethod.Post, url, jsonContent, customHeaders);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -173,15 +183,14 @@ namespace Bimehcom.Client.Services
         {
             try
             {
-                ApplyGlobalHeaders(customHeaders);
-
                 using var form = new MultipartFormDataContent();
                 using var fileContent = new StreamContent(fileStream);
 
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 form.Add(fileContent, formFieldName, fileName);
 
-                var response = await _httpClient.PostAsync(url, form, cancellationToken);
+                var request = BuildRequest(HttpMethod.Post, url, form, customHeaders);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -204,10 +213,9 @@ namespace Bimehcom.Client.Services
         {
             try
             {
-                ApplyGlobalHeaders(customHeaders);
-
                 var jsonContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PutAsync(url, jsonContent, cancellationToken);
+                var request = BuildRequest(HttpMethod.Put, url, jsonContent, customHeaders);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
@@ -230,9 +238,8 @@ namespace Bimehcom.Client.Services
         {
             try
             {
-                ApplyGlobalHeaders(customHeaders);
-
-                var response = await _httpClient.DeleteAsync(url, cancellationToken);
+                var request = BuildRequest(HttpMethod.Delete, url, null, customHeaders);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
 
                 ValidateResponse(response, json);
