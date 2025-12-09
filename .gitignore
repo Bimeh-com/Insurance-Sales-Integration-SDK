@@ -94,3 +94,5 @@ appsettings*.json
 
 
 .localtools/
+
+!Bimehcom.Client.*.nupkg
