@@ -185,7 +185,24 @@ namespace Bimehcom.Tests.Unit.Client.Services
                 Content = new StringContent("{}")
             };
 
-            var service = CreateService(response);
+            // Create a handler that captures the outgoing request
+            HttpRequestMessage? lastRequest = null;
+            var handlerMock = new Moq.Mock<HttpMessageHandler>();
+            handlerMock
+                .Protected()
+                .Setup<System.Threading.Tasks.Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>((req, ct) => lastRequest = req)
+                .ReturnsAsync(response);
+
+            var client = new HttpClient(handlerMock.Object)
+            {
+                BaseAddress = _options.BaseApiUrl
+            };
+
+            var service = new HttpService(_options, client);
 
             service.AddGlobalHeader("Token", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
 
@@ -196,12 +213,9 @@ namespace Bimehcom.Tests.Unit.Client.Services
 
             await service.GetAsync<TestGetResponse>("test", customHeaders);
 
-            var httpClient = typeof(HttpService)
-                .GetField("_httpClient", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.GetValue(service) as HttpClient;
-
-            httpClient.DefaultRequestHeaders.Contains("Token").Should().BeTrue();
-            httpClient.DefaultRequestHeaders.Contains("Custom").Should().BeTrue();
+            lastRequest.Should().NotBeNull();
+            lastRequest!.Headers.Contains("Token").Should().BeTrue();
+            lastRequest.Headers.Contains("Custom").Should().BeTrue();
         }
     }
 }
