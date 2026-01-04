@@ -195,6 +195,18 @@ namespace Bimehcom.Client
             }
         }
 
+        private IElectronicEquipmentInsuranceClient? _electronicEquipment;
+        public IElectronicEquipmentInsuranceClient ElectronicEquipment
+        {
+            get
+            {
+                if (_electronicEquipment == null)
+                    lock (_lock)
+                        _electronicEquipment = new ElectronicEquipmentInsuranceClient(_httpService);
+                return _electronicEquipment;
+            }
+        }
+
         #endregion
     }
 }

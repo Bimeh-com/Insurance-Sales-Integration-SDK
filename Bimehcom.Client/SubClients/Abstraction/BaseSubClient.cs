@@ -10,7 +10,7 @@ namespace Bimehcom.Client.SubClients.Abstraction
 {
     internal abstract class BaseSubClient : IBaseSubClient
     {
-        private readonly IHttpService _httpService;
+        public readonly IHttpService _httpService;
         private readonly string InsuranceType;
         public BaseSubClient(IHttpService httpService, string clientType)
         {

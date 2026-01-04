@@ -1,7 +1,6 @@
 ﻿using Bimehcom.Client.Extensions;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Interfaces.SubClients;
-using Bimehcom.Core.Models.SubClients.CarBody.Responses;
 using Bimehcom.Core.Models.SubClients.User.Requests;
 using Bimehcom.Core.Models.SubClients.User.Responses;
 using System.Threading;

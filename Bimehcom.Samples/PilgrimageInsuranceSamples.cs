@@ -26,7 +26,7 @@ namespace Bimehcom.Samples
             var inquiryRequest = new PilgrimageInsuranceInquiryRequest
             {
                 BirthDate = DateTime.Parse(sampleUser.BirthDate),
-                TravelStartDate = DateTime.Parse("2026/1/1"),
+                TravelStartDate = DateTime.UtcNow.AddDays(1),
             };
 
 
