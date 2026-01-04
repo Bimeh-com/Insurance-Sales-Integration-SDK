@@ -21,6 +21,7 @@ namespace Bimehcom.Core.Interfaces
         ISportsInsuranceClient Sports { get; }
         IPilgrimageInsuranceClient Pilgrimage { get; }
         ITravelPlusInsuranceClient TravelPlus { get; }
+        IElectronicEquipmentInsuranceClient ElectronicEquipment { get; }
 
     }
 }

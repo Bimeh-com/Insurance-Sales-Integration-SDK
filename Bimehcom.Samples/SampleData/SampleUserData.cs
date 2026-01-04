@@ -11,6 +11,7 @@ namespace Bimehcom.Samples.SampleData
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string NationalCode { get; set; }
+        public string IdentityNumber { get; set; }
         public string Email { get; set; }
         public string IBAN { get; set; }
         public string BirthDate { get; set; }
@@ -22,5 +23,6 @@ namespace Bimehcom.Samples.SampleData
         public short PlaqueRightSide { get; set; }
         public int PlaqueIranCode { get; set; }
         public string PlaqueNationalCode { get; set; }
+        public string SerialNumber { get; set; }
     }
 }

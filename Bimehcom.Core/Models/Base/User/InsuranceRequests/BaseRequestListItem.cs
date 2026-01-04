@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bimehcom.Core.Models.Base.User
+namespace Bimehcom.Core.Models.Base.User.InsuranceRequests
 {
     public class BaseRequestListItem
     {

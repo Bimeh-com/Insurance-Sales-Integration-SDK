@@ -1,9 +1,9 @@
 ﻿using Bimehcom.Client;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
+using Bimehcom.Samples;
 using Bimehcom.Samples.SampleData;
 using System.Text.Json;
-using Bimehcom.Samples;
 var sampleDataPath = Path.Combine(AppContext.BaseDirectory, "SampleData", "sample-user.json");
 var sampleUser = JsonSerializer.Deserialize<SampleUserData>(File.ReadAllText(sampleDataPath));
 
@@ -59,3 +59,6 @@ var loginResponse = await client.Auth.LocalLoginAsync(localLoginRequest);
 
 // Travel Plus Insurance
 //await new TravelPlusInsuranceSamples(client).RunAsync();
+
+// Electronic Equipment Insurance
+await new ElectronicEquipmentInsuranceSamples(client).RunAsync();

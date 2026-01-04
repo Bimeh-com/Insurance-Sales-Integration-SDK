@@ -26,6 +26,10 @@ namespace Bimehcom.Client.Extensions
         internal static string CarModels(string subClientName, int brandId, int categoryId) => $"insurance/{subClientName}/car-model/{brandId}/{categoryId}";
         internal static string PlaqueIInquiry() => $"public/plaque";
 
+        // Electronic Equipment
+        internal static string GetElectronicEquipmentBrands(long deviceId) => $"insurance/electronic-equipment/brand/{deviceId}";
+        internal static string GetElectronicEquipmentModels(long brandId) => $"insurance/electronic-equipment/model/{brandId}";
+
         // General Insurance Sales Workflow
         internal static string BasicData(string subClientName) => $"insurance/{subClientName}/basic-data";
         internal static string Inquiry(string subClientName) => $"insurance/{subClientName}/inquiry";

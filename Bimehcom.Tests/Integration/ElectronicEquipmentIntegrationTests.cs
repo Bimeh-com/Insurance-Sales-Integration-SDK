@@ -1,6 +1,7 @@
-using Bimehcom.Client;
+﻿using Bimehcom.Client;
 using Bimehcom.Core.Interfaces;
 using Bimehcom.Core.Models.SubClients.Auth.Requests;
+using Bimehcom.Samples;
 using FluentAssertions;
 using Bimehcom.Samples.SampleData;
 using System.Text.Json;
@@ -8,7 +9,7 @@ using Bimehcom.Client.Services;
 
 namespace Bimehcom.Tests.Integration
 {
-    public class MedicalLiabilityIntegrationTests
+    public class ElectronicEquipmentIntegrationTests
     {
         private IBimehcomClient CreateClient()
         {
@@ -38,11 +39,11 @@ namespace Bimehcom.Tests.Integration
         }
 
         [Fact]
-        public async Task MedicalLiability_RunAsync_ShouldReturnTrue()
+        public async Task ElectronicEquipment_RunAsync_ShouldReturnTrue()
         {
             var client = CreateClient();
             await AuthenticateAsync(client);
-            var result = await new MedicalLiabilityInsuranceSamples(client).RunAsync();
+            var result = await new ElectronicEquipmentInsuranceSamples(client).RunAsync();
             result.Should().BeTrue();
         }
     }
